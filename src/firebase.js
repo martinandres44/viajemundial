@@ -1,8 +1,3 @@
-// =============================================================
-//  INSTRUCCIONES: Reemplazá los valores de abajo con los tuyos
-//  (los sacás de la consola de Firebase, paso a paso en el README)
-// =============================================================
-
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, set } from 'firebase/database';
 
@@ -18,15 +13,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const tripRef = ref(db, 'mundial-2026');
 
-// Referencia principal donde se guarda todo el viaje
-const tripRef = ref(db, 'miami-trip-2026');
-
-/**
- * Escucha cambios en tiempo real de Firebase
- * @param {Function} callback - Recibe los datos actualizados
- * @returns {Function} unsubscribe
- */
 export function onTripData(callback) {
   return onValue(tripRef, (snapshot) => {
     const data = snapshot.val();
@@ -36,10 +24,6 @@ export function onTripData(callback) {
   });
 }
 
-/**
- * Guarda todos los datos del viaje en Firebase
- * @param {Object} data - Datos completos del viaje
- */
 export async function saveTripData(data) {
   try {
     await set(tripRef, data);
