@@ -89,8 +89,18 @@ const DEFAULT_DATA = {
     { id: "f8", type: "vuelta", airline: "American Airlines", flightNumber: "", from: "MIA", to: "LIM", date: "2026-06-28", time: "17:35", confirmation: "", status: "pendiente", notes: "Llegada 22:15 · USD 412" },
     { id: "f9", type: "vuelta", airline: "Aerolineas Argentinas", flightNumber: "", from: "LIM", to: "AEP", date: "2026-06-28", time: "22:40", confirmation: "", status: "pendiente", notes: "Llegada 05:00 (+1) · USD 726" },
   ],
-  hotel: { name: "", address: "", checkIn: "2026-06-12", checkOut: "2026-06-28", confirmation: "", totalCost: 0, currency: "USD", notes: "Múltiples alojamientos - ver itinerario", paid: false },
-  car: { company: "", pickUp: "2026-06-17", dropOff: "2026-06-21", confirmation: "", totalCost: 0, currency: "USD", notes: "Las Vegas + Grand Canyon (17-21 Jun)\nSegundo auto en Orlando (22-25 Jun)", paid: false },
+  hotels: [
+    { id: "h1", name: "", address: "", city: "NYC", checkIn: "2026-06-12", checkOut: "2026-06-16", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false },
+    { id: "h2", name: "", address: "", city: "Kansas City", checkIn: "2026-06-16", checkOut: "2026-06-17", confirmation: "", totalCost: 0, currency: "USD", notes: "Una noche post partido", paid: false },
+    { id: "h3", name: "", address: "", city: "Las Vegas", checkIn: "2026-06-17", checkOut: "2026-06-21", confirmation: "", totalCost: 0, currency: "USD", notes: "Base para Grand Canyon", paid: false },
+    { id: "h4", name: "", address: "", city: "Dallas", checkIn: "2026-06-21", checkOut: "2026-06-22", confirmation: "", totalCost: 0, currency: "USD", notes: "Una noche, vuelo a Orlando al día siguiente", paid: false },
+    { id: "h5", name: "", address: "", city: "Orlando", checkIn: "2026-06-22", checkOut: "2026-06-25", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false },
+    { id: "h6", name: "", address: "", city: "Miami / Siesta Key", checkIn: "2026-06-25", checkOut: "2026-06-28", confirmation: "", totalCost: 0, currency: "USD", notes: "Últimos días antes de la vuelta", paid: false },
+  ],
+  cars: [
+    { id: "car1", company: "", city: "Las Vegas", pickUp: "2026-06-17", dropOff: "2026-06-21", confirmation: "", totalCost: 0, currency: "USD", notes: "Las Vegas + Grand Canyon · Devolver en Phoenix", paid: false },
+    { id: "car2", company: "", city: "Orlando", pickUp: "2026-06-22", dropOff: "2026-06-25", confirmation: "", totalCost: 0, currency: "USD", notes: "Orlando · Devolver antes de ir a Miami", paid: false },
+  ],
   tickets: [],
   expenses: [],
   itinerary: [
@@ -99,13 +109,13 @@ const DEFAULT_DATA = {
     { id: "d3", date: "2026-06-13", title: "NYC 🗽", activities: "Día libre en New York\nManhattan\nTimes Square\nCentral Park\nBrooklyn Bridge", notes: "Primer día completo en NYC" },
     { id: "d4", date: "2026-06-14", title: "NYC 🗽", activities: "Día libre en New York\nStatue of Liberty\nWall Street\nSoHo / Chelsea", notes: "Segundo día en NYC" },
     { id: "d5", date: "2026-06-15", title: "NYC → Kansas City ✈️", activities: "Día libre en NYC por la mañana\nPreparar para Kansas", notes: "Vuelo al día siguiente temprano" },
-    { id: "d6", date: "2026-06-16", title: "Kansas City ⚽ ARGENTINA", activities: "08:55 - Vuelo NYC → Kansas City (Southwest)\n11:05 - Llegada a Kansas City\n⚽ ARGENTINA vs ??? - Partido 1 del Mundial 🇦🇷", notes: "🏟️ Primer partido de Argentina en el Mundial 2026" },
+    { id: "d6", date: "2026-06-16", title: "Kansas City ⚽ ARGENTINA vs ARGELIA", activities: "08:55 - Vuelo NYC → Kansas City (Southwest)\n11:05 - Llegada a Kansas City\n⚽ ARGENTINA 🇦🇷 vs ARGELIA 🇩🇿 - Partido 1 del Mundial", notes: "🏟️ Primer partido de Argentina en el Mundial 2026" },
     { id: "d7", date: "2026-06-17", title: "Kansas → Las Vegas ✈️🎰", activities: "08:45 - Vuelo MCI → LAS (Southwest)\n09:45 - Llegada a Las Vegas\nRetirar auto rental\nCheck-in hotel\nExplorar el Strip", notes: "Empieza tramo Las Vegas + Grand Canyon" },
     { id: "d8", date: "2026-06-18", title: "Las Vegas 🎰", activities: "Día libre en Las Vegas\nCasinos\nShows\nFremont Street\nPools", notes: "Día completo en Vegas" },
     { id: "d9", date: "2026-06-19", title: "Viaje a Grand Canyon 🏜️", activities: "Salida temprano en auto\nRuta Las Vegas → Grand Canyon (~4hs)\nGrand Canyon National Park\nSouth Rim viewpoints", notes: "Ruta por la I-40, llevar agua y protector solar" },
     { id: "d10", date: "2026-06-20", title: "Grand Canyon 🏜️", activities: "Grand Canyon - Día completo\nHiking trails\nMirador Desert View\nRegreso a Las Vegas o Phoenix", notes: "Definir si volvemos a Vegas o seguimos a Phoenix" },
     { id: "d11", date: "2026-06-21", title: "Phoenix → Dallas ✈️", activities: "Devolver auto rental\n18:55 - Vuelo PHX → DFW (Southwest)\n23:20 - Llegada a Dallas", notes: "Llegada tarde a Dallas" },
-    { id: "d12", date: "2026-06-22", title: "Dallas ⚽ ARGENTINA", activities: "⚽ ARGENTINA vs ??? - Partido del Mundial 🇦🇷\n18:50 - Vuelo DFW → MCO (Southwest)\n22:15 - Llegada a Orlando", notes: "🏟️ Segundo partido de Argentina · Vuelo nocturno a Orlando" },
+    { id: "d12", date: "2026-06-22", title: "Dallas ⚽ ARGENTINA vs AUSTRIA", activities: "⚽ ARGENTINA 🇦🇷 vs AUSTRIA 🇦🇹 - Partido 2 del Mundial\n18:50 - Vuelo DFW → MCO (Southwest)\n22:15 - Llegada a Orlando", notes: "🏟️ Segundo partido de Argentina · Vuelo nocturno a Orlando" },
     { id: "d13", date: "2026-06-23", title: "Orlando 🏰", activities: "Retirar auto rental\nDía libre en Orlando\nDisney Springs\nInternational Drive", notes: "Primer día en Orlando" },
     { id: "d14", date: "2026-06-24", title: "Orlando 🏰", activities: "Día libre en Orlando\nParques temáticos\nUniversal / Disney / SeaWorld", notes: "Día de parques" },
     { id: "d15", date: "2026-06-25", title: "Miami o Siesta Key 🏖️", activities: "Devolver auto Orlando\nViaje a Miami o Siesta Key\nPlaya y relax", notes: "Definir destino final" },
@@ -457,7 +467,11 @@ function DashboardSection({ data, updateData }) {
   const topCategory = Object.entries(byCategory).sort((a, b) => b[1] - a[1])[0];
   const daysUntil = Math.max(0, Math.ceil((new Date("2026-06-11") - getUSNow()) / (1000 * 60 * 60 * 24)));
   const confirmedFlights = (data.flights || []).filter((f) => f.status === "confirmado").length;
-  const pendingItems = [!data.hotel?.confirmation && "Hotel", !data.car?.confirmation && "Auto", ...(data.flights || []).filter((f) => !f.confirmation).map((f) => `Vuelo ${f.type}`)].filter(Boolean);
+  const pendingItems = [
+    ...(data.hotels || []).filter(h => !h.confirmation).map(h => `Aloj. ${h.city || h.name || "?"}`),
+    ...(data.cars || []).filter(c => !c.confirmation).map(c => `Auto ${c.city || c.company || "?"}`),
+    ...(data.flights || []).filter(f => !f.confirmation).map(f => `Vuelo ${f.from}→${f.to}`),
+  ];
 
   return (
     <div>
@@ -605,97 +619,264 @@ function FlightsSection({ data, updateData }) {
 }
 
 function HotelSection({ data, updateData }) {
-  const h = data.hotel || {};
-  const update = (field, val) => updateData({ ...data, hotel: { ...h, [field]: val } });
-  const nights = h.checkIn && h.checkOut ? Math.max(0, Math.ceil((new Date(h.checkOut) - new Date(h.checkIn)) / 86400000)) : 0;
+  const [viewing, setViewing] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [editForm, setEditForm] = useState({});
+  const [form, setForm] = useState({ name: "", address: "", city: "", checkIn: "", checkOut: "", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false });
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-  // Extract Google Maps URL from notes
-  const { urls: noteUrls, cleanText: cleanNotes } = extractUrls(h.notes);
-  const mapsUrl = noteUrls.find(isGoogleMapsUrl);
-  const otherUrls = noteUrls.filter(u => !isGoogleMapsUrl(u));
+  const hotels = data.hotels || [];
+  const viewHotel = hotels.find(h => h.id === viewing);
 
-  // Coordinates - will use default if no specific address
-  const hotelLat = 40.7128;
-  const hotelLon = -74.0060;
+  const add = () => {
+    if (!form.city && !form.name) return;
+    updateData({ ...data, hotels: [...hotels, { ...form, id: Date.now().toString() }] });
+    setForm({ name: "", address: "", city: "", checkIn: "", checkOut: "", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false });
+    setAdding(false);
+  };
+  const remove = (id) => { updateData({ ...data, hotels: hotels.filter(h => h.id !== id) }); setViewing(null); setEditing(false); setConfirmDelete(false); };
+  const startEdit = () => { if (!viewHotel) return; setEditForm({ ...viewHotel }); setEditing(true); setConfirmDelete(false); };
+  const saveEdit = () => { if (!viewing) return; updateData({ ...data, hotels: hotels.map(h => h.id === viewing ? { ...h, ...editForm } : h) }); setEditing(false); };
 
+  const totalCost = hotels.reduce((s, h) => s + (h.totalCost || 0), 0);
+
+  // DETAIL VIEW
+  if (viewHotel) {
+    const nights = viewHotel.checkIn && viewHotel.checkOut ? Math.max(0, Math.ceil((new Date(viewHotel.checkOut) - new Date(viewHotel.checkIn)) / 86400000)) : 0;
+    return (
+      <div>
+        <button onClick={() => { setViewing(null); setEditing(false); }} style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", color: "#00D4AA", fontSize: 13, fontWeight: 600, cursor: "pointer", padding: "0 0 16px" }}>← Alojamientos</button>
+        <Card>
+          {!editing ? (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <StatusBadge status={viewHotel.confirmation ? "confirmado" : "pendiente"} />
+                {nights > 0 && <span style={{ fontSize: 13, color: "#8892A4" }}>{nights} noches</span>}
+              </div>
+              <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📍 {viewHotel.city}</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>{viewHotel.name || "Sin nombre"}</div>
+              {viewHotel.address && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Dirección</div><div style={{ fontSize: 14, color: "#C8CDD8" }}>{viewHotel.address}</div></div>}
+              <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
+                <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Check-in</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewHotel.checkIn}</div></div>
+                <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Check-out</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewHotel.checkOut}</div></div>
+              </div>
+              {viewHotel.confirmation && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Confirmación</div><div style={{ fontSize: 15, color: "#00D4AA", fontWeight: 700 }}>🔑 {viewHotel.confirmation}</div></div>}
+              {viewHotel.totalCost > 0 && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Costo</div><div style={{ fontSize: 15, color: "#E8ECF4", fontWeight: 700 }}>${viewHotel.totalCost} {viewHotel.paid ? "✅ Pagado" : "⏳ Pendiente"}</div></div>}
+              {viewHotel.notes && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Notas</div><div style={{ fontSize: 14, color: "#C8CDD8" }}>{viewHotel.notes}</div></div>}
+              <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: 8 }}>
+                <Btn onClick={startEdit} variant="secondary" small style={{ flex: 1 }}>✏️ Editar</Btn>
+                {!confirmDelete ? <Btn onClick={() => setConfirmDelete(true)} variant="danger" small style={{ flex: 1 }}>🗑 Borrar</Btn> : <Btn onClick={() => remove(viewHotel.id)} variant="danger" small style={{ flex: 1, background: "rgba(255,107,107,0.3)" }}>¿Seguro? Confirmar</Btn>}
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Editar alojamiento</div>
+              <Input label="Ciudad" value={editForm.city} onChange={(v) => setEditForm({ ...editForm, city: v })} placeholder="NYC, Las Vegas, etc." />
+              <Input label="Nombre" value={editForm.name} onChange={(v) => setEditForm({ ...editForm, name: v })} placeholder="Hotel, Airbnb, etc." />
+              <Input label="Dirección" value={editForm.address} onChange={(v) => setEditForm({ ...editForm, address: v })} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <Input label="Check-in" value={editForm.checkIn} onChange={(v) => setEditForm({ ...editForm, checkIn: v })} type="date" />
+                <Input label="Check-out" value={editForm.checkOut} onChange={(v) => setEditForm({ ...editForm, checkOut: v })} type="date" />
+              </div>
+              <Input label="Confirmación" value={editForm.confirmation} onChange={(v) => setEditForm({ ...editForm, confirmation: v })} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <Input label="Costo (USD)" value={editForm.totalCost} onChange={(v) => setEditForm({ ...editForm, totalCost: parseFloat(v) || 0 })} type="number" />
+                <div style={{ display: "flex", alignItems: "end", paddingBottom: 14 }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}><input type="checkbox" checked={editForm.paid || false} onChange={(e) => setEditForm({ ...editForm, paid: e.target.checked })} style={{ width: 18, height: 18, accentColor: "#00D4AA" }} /><span style={{ fontSize: 13, color: "#E8ECF4" }}>Pagado</span></label>
+                </div>
+              </div>
+              <Input label="Notas" value={editForm.notes} onChange={(v) => setEditForm({ ...editForm, notes: v })} />
+              <div style={{ display: "flex", gap: 8 }}><Btn onClick={saveEdit} small style={{ flex: 1 }}>✓ Guardar</Btn><Btn onClick={() => setEditing(false)} variant="secondary" small>Cancelar</Btn></div>
+            </>
+          )}
+        </Card>
+      </div>
+    );
+  }
+
+  // LIST VIEW
   return (
     <div>
-      <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>🏠 Alojamiento</div>
-      <Card>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-          <StatusBadge status={h.confirmation ? "confirmado" : "pendiente"} />
-          {nights > 0 && <span style={{ fontSize: 13, color: "#8892A4" }}>{nights} noches</span>}
-        </div>
-        <Input label="Nombre" value={h.name} onChange={(v) => update("name", v)} placeholder="Nombre del Airbnb" />
-        <Input label="Dirección" value={h.address} onChange={(v) => update("address", v)} placeholder="Dirección o link de Google Maps" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Input label="Check-in" value={h.checkIn} onChange={(v) => update("checkIn", v)} type="date" />
-          <Input label="Check-out" value={h.checkOut} onChange={(v) => update("checkOut", v)} type="date" />
-        </div>
-        <Input label="Confirmación" value={h.confirmation} onChange={(v) => update("confirmation", v)} placeholder="Código de reserva" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Input label="Costo Total (USD)" value={h.totalCost} onChange={(v) => update("totalCost", parseFloat(v) || 0)} type="number" />
-          <div style={{ display: "flex", alignItems: "end", paddingBottom: 14 }}>
-            <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
-              <input type="checkbox" checked={h.paid || false} onChange={(e) => update("paid", e.target.checked)} style={{ width: 18, height: 18, accentColor: "#00D4AA" }} />
-              <span style={{ fontSize: 13, color: "#E8ECF4" }}>Pagado</span>
-            </label>
-          </div>
-        </div>
-        <Input label="Notas" value={h.notes} onChange={(v) => update("notes", v)} placeholder="WiFi, parking, link de Maps, etc." />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", fontFamily: "'Playfair Display', serif" }}>🏠 Alojamientos</div>
+        <Btn onClick={() => setAdding(!adding)} small>{adding ? "✕ Cerrar" : "+ Agregar"}</Btn>
+      </div>
 
-        {/* Google Maps Preview */}
-        {mapsUrl && (
-          <MapPreview
-            url={mapsUrl}
-            address={h.address || h.name}
-            lat={hotelLat}
-            lon={hotelLon}
-          />
-        )}
-
-        {/* Other non-Maps links rendered as buttons */}
-        {otherUrls.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
-            {otherUrls.map((url, i) => (
-              <ClickableLink key={i} url={url} label={url.replace(/https?:\/\/(www\.)?/, '').split('/')[0]} />
-            ))}
+      {totalCost > 0 && (
+        <Card style={{ marginBottom: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 12, color: "#8892A4" }}>{hotels.length} alojamientos</span>
+            <span style={{ fontSize: 16, fontWeight: 800, color: "#00D4AA" }}>${totalCost.toLocaleString()}</span>
           </div>
-        )}
-      </Card>
+        </Card>
+      )}
+
+      {adding && (
+        <Card style={{ marginBottom: 14, borderColor: "rgba(0,212,170,0.2)" }}>
+          <Input label="Ciudad" value={form.city} onChange={(v) => setForm({ ...form, city: v })} placeholder="NYC, Las Vegas, etc." />
+          <Input label="Nombre" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="Hotel, Airbnb, etc." />
+          <Input label="Dirección" value={form.address} onChange={(v) => setForm({ ...form, address: v })} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+            <Input label="Check-in" value={form.checkIn} onChange={(v) => setForm({ ...form, checkIn: v })} type="date" />
+            <Input label="Check-out" value={form.checkOut} onChange={(v) => setForm({ ...form, checkOut: v })} type="date" />
+          </div>
+          <Input label="Notas" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} />
+          <Btn onClick={add} style={{ width: "100%" }}>Guardar Alojamiento</Btn>
+        </Card>
+      )}
+
+      {hotels.length === 0 && !adding && (
+        <Card style={{ textAlign: "center", padding: 40 }}><div style={{ fontSize: 40, marginBottom: 10 }}>🏠</div><div style={{ fontSize: 14, color: "#8892A4" }}>Agregá tus alojamientos</div></Card>
+      )}
+
+      {hotels.map(h => {
+        const nights = h.checkIn && h.checkOut ? Math.max(0, Math.ceil((new Date(h.checkOut) - new Date(h.checkIn)) / 86400000)) : 0;
+        return (
+          <Card key={h.id} onClick={() => { setViewing(h.id); setAdding(false); }} style={{ marginBottom: 8, padding: 14, cursor: "pointer" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 42, height: 42, borderRadius: 12, background: "rgba(96,165,250,0.12)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ fontSize: 18 }}>🏠</div>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.city || h.name || "Sin nombre"}</div>
+                <div style={{ fontSize: 11, color: "#8892A4", marginTop: 2 }}>{nights} noches · {h.checkIn?.slice(5)} → {h.checkOut?.slice(5)}{h.confirmation ? " · ✅" : ""}</div>
+              </div>
+              <span style={{ color: "#4B5563", fontSize: 14, flexShrink: 0 }}>›</span>
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 }
 
 function CarSection({ data, updateData }) {
-  const c = data.car || {};
-  const update = (field, val) => updateData({ ...data, car: { ...c, [field]: val } });
-  const days = c.pickUp && c.dropOff ? Math.max(0, Math.ceil((new Date(c.dropOff) - new Date(c.pickUp)) / 86400000)) : 0;
+  const [viewing, setViewing] = useState(null);
+  const [editing, setEditing] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [editForm, setEditForm] = useState({});
+  const [form, setForm] = useState({ company: "", city: "", pickUp: "", dropOff: "", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false });
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const cars = data.cars || [];
+  const viewCar = cars.find(c => c.id === viewing);
+
+  const add = () => {
+    if (!form.city && !form.company) return;
+    updateData({ ...data, cars: [...cars, { ...form, id: Date.now().toString() }] });
+    setForm({ company: "", city: "", pickUp: "", dropOff: "", confirmation: "", totalCost: 0, currency: "USD", notes: "", paid: false });
+    setAdding(false);
+  };
+  const remove = (id) => { updateData({ ...data, cars: cars.filter(c => c.id !== id) }); setViewing(null); setEditing(false); setConfirmDelete(false); };
+  const startEdit = () => { if (!viewCar) return; setEditForm({ ...viewCar }); setEditing(true); setConfirmDelete(false); };
+  const saveEdit = () => { if (!viewing) return; updateData({ ...data, cars: cars.map(c => c.id === viewing ? { ...c, ...editForm } : c) }); setEditing(false); };
+
+  const totalCost = cars.reduce((s, c) => s + (c.totalCost || 0), 0);
+
+  // DETAIL VIEW
+  if (viewCar) {
+    const days = viewCar.pickUp && viewCar.dropOff ? Math.max(0, Math.ceil((new Date(viewCar.dropOff) - new Date(viewCar.pickUp)) / 86400000)) : 0;
+    return (
+      <div>
+        <button onClick={() => { setViewing(null); setEditing(false); }} style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", color: "#00D4AA", fontSize: 13, fontWeight: 600, cursor: "pointer", padding: "0 0 16px" }}>← Autos</button>
+        <Card>
+          {!editing ? (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <StatusBadge status={viewCar.confirmation ? "confirmado" : "pendiente"} />
+                {days > 0 && <span style={{ fontSize: 13, color: "#8892A4" }}>{days} días</span>}
+              </div>
+              <div style={{ fontSize: 11, color: "#34D399", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📍 {viewCar.city}</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>{viewCar.company || "Sin compañía"}</div>
+              <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
+                <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Pick-up</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewCar.pickUp}</div></div>
+                <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Drop-off</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewCar.dropOff}</div></div>
+              </div>
+              {viewCar.confirmation && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Confirmación</div><div style={{ fontSize: 15, color: "#00D4AA", fontWeight: 700 }}>🔑 {viewCar.confirmation}</div></div>}
+              {viewCar.totalCost > 0 && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Costo</div><div style={{ fontSize: 15, color: "#E8ECF4", fontWeight: 700 }}>${viewCar.totalCost} {viewCar.paid ? "✅ Pagado" : "⏳ Pendiente"}</div></div>}
+              {viewCar.notes && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Notas</div><div style={{ fontSize: 14, color: "#C8CDD8" }}>{viewCar.notes}</div></div>}
+              <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: 8 }}>
+                <Btn onClick={startEdit} variant="secondary" small style={{ flex: 1 }}>✏️ Editar</Btn>
+                {!confirmDelete ? <Btn onClick={() => setConfirmDelete(true)} variant="danger" small style={{ flex: 1 }}>🗑 Borrar</Btn> : <Btn onClick={() => remove(viewCar.id)} variant="danger" small style={{ flex: 1, background: "rgba(255,107,107,0.3)" }}>¿Seguro? Confirmar</Btn>}
+              </div>
+            </>
+          ) : (
+            <>
+              <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Editar auto</div>
+              <Input label="Ciudad" value={editForm.city} onChange={(v) => setEditForm({ ...editForm, city: v })} placeholder="Las Vegas, Orlando, etc." />
+              <Input label="Compañía" value={editForm.company} onChange={(v) => setEditForm({ ...editForm, company: v })} placeholder="Hertz, Avis, etc." />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <Input label="Pick-up" value={editForm.pickUp} onChange={(v) => setEditForm({ ...editForm, pickUp: v })} type="date" />
+                <Input label="Drop-off" value={editForm.dropOff} onChange={(v) => setEditForm({ ...editForm, dropOff: v })} type="date" />
+              </div>
+              <Input label="Confirmación" value={editForm.confirmation} onChange={(v) => setEditForm({ ...editForm, confirmation: v })} />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <Input label="Costo (USD)" value={editForm.totalCost} onChange={(v) => setEditForm({ ...editForm, totalCost: parseFloat(v) || 0 })} type="number" />
+                <div style={{ display: "flex", alignItems: "end", paddingBottom: 14 }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}><input type="checkbox" checked={editForm.paid || false} onChange={(e) => setEditForm({ ...editForm, paid: e.target.checked })} style={{ width: 18, height: 18, accentColor: "#00D4AA" }} /><span style={{ fontSize: 13, color: "#E8ECF4" }}>Pagado</span></label>
+                </div>
+              </div>
+              <Input label="Notas" value={editForm.notes} onChange={(v) => setEditForm({ ...editForm, notes: v })} />
+              <div style={{ display: "flex", gap: 8 }}><Btn onClick={saveEdit} small style={{ flex: 1 }}>✓ Guardar</Btn><Btn onClick={() => setEditing(false)} variant="secondary" small>Cancelar</Btn></div>
+            </>
+          )}
+        </Card>
+      </div>
+    );
+  }
+
+  // LIST VIEW
   return (
     <div>
-      <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>🚘 Auto Rental</div>
-      <Card>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-          <StatusBadge status={c.confirmation ? "confirmado" : "pendiente"} />
-          {days > 0 && <span style={{ fontSize: 13, color: "#8892A4" }}>{days} días</span>}
-        </div>
-        <Input label="Compañía" value={c.company} onChange={(v) => update("company", v)} placeholder="Hertz, Avis, etc." />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Input label="Pick-up" value={c.pickUp} onChange={(v) => update("pickUp", v)} type="date" />
-          <Input label="Drop-off" value={c.dropOff} onChange={(v) => update("dropOff", v)} type="date" />
-        </div>
-        <Input label="Confirmación" value={c.confirmation} onChange={(v) => update("confirmation", v)} placeholder="Código de reserva" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Input label="Costo Total (USD)" value={c.totalCost} onChange={(v) => update("totalCost", parseFloat(v) || 0)} type="number" />
-          <div style={{ display: "flex", alignItems: "end", paddingBottom: 14 }}>
-            <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
-              <input type="checkbox" checked={c.paid || false} onChange={(e) => update("paid", e.target.checked)} style={{ width: 18, height: 18, accentColor: "#00D4AA" }} />
-              <span style={{ fontSize: 13, color: "#E8ECF4" }}>Pagado</span>
-            </label>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", fontFamily: "'Playfair Display', serif" }}>🚘 Autos Rental</div>
+        <Btn onClick={() => setAdding(!adding)} small>{adding ? "✕ Cerrar" : "+ Agregar"}</Btn>
+      </div>
+
+      {totalCost > 0 && (
+        <Card style={{ marginBottom: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 12, color: "#8892A4" }}>{cars.length} autos</span>
+            <span style={{ fontSize: 16, fontWeight: 800, color: "#00D4AA" }}>${totalCost.toLocaleString()}</span>
           </div>
-        </div>
-        <Input label="Notas" value={c.notes} onChange={(v) => update("notes", v)} placeholder="Seguro, GPS, etc." />
-      </Card>
+        </Card>
+      )}
+
+      {adding && (
+        <Card style={{ marginBottom: 14, borderColor: "rgba(0,212,170,0.2)" }}>
+          <Input label="Ciudad" value={form.city} onChange={(v) => setForm({ ...form, city: v })} placeholder="Las Vegas, Orlando, etc." />
+          <Input label="Compañía" value={form.company} onChange={(v) => setForm({ ...form, company: v })} placeholder="Hertz, Avis, etc." />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+            <Input label="Pick-up" value={form.pickUp} onChange={(v) => setForm({ ...form, pickUp: v })} type="date" />
+            <Input label="Drop-off" value={form.dropOff} onChange={(v) => setForm({ ...form, dropOff: v })} type="date" />
+          </div>
+          <Input label="Notas" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} />
+          <Btn onClick={add} style={{ width: "100%" }}>Guardar Auto</Btn>
+        </Card>
+      )}
+
+      {cars.length === 0 && !adding && (
+        <Card style={{ textAlign: "center", padding: 40 }}><div style={{ fontSize: 40, marginBottom: 10 }}>🚘</div><div style={{ fontSize: 14, color: "#8892A4" }}>Agregá tus autos rental</div></Card>
+      )}
+
+      {cars.map(c => {
+        const days = c.pickUp && c.dropOff ? Math.max(0, Math.ceil((new Date(c.dropOff) - new Date(c.pickUp)) / 86400000)) : 0;
+        return (
+          <Card key={c.id} onClick={() => { setViewing(c.id); setAdding(false); }} style={{ marginBottom: 8, padding: 14, cursor: "pointer" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 42, height: 42, borderRadius: 12, background: "rgba(52,211,153,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ fontSize: 18 }}>🚘</div>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.city || c.company || "Sin nombre"}</div>
+                <div style={{ fontSize: 11, color: "#8892A4", marginTop: 2 }}>{days} días · {c.pickUp?.slice(5)} → {c.dropOff?.slice(5)}{c.confirmation ? " · ✅" : ""}</div>
+              </div>
+              <span style={{ color: "#4B5563", fontSize: 14, flexShrink: 0 }}>›</span>
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 }
@@ -1489,11 +1670,12 @@ export default function App() {
       <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 480, background: "rgba(10,14,26,0.95)", backdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-around", padding: "6px 0 env(safe-area-inset-bottom, 8px)", zIndex: 20, overflowX: "auto" }}>
         <Tab active={tab === "dashboard"} onClick={() => setTab("dashboard")} icon="🏠" label="Home" />
         <Tab active={tab === "flights"} onClick={() => setTab("flights")} icon="✈️" label="Vuelos" />
-        <Tab active={tab === "hotel" || tab === "car"} onClick={() => setTab(tab === "hotel" ? "car" : "hotel")} icon="🏡" label="Aloj." />
+        <Tab active={tab === "hotel"} onClick={() => setTab("hotel")} icon="🏨" label="Aloj." />
+        <Tab active={tab === "car"} onClick={() => setTab("car")} icon="🚘" label="Autos" />
         <Tab active={tab === "expenses"} onClick={() => setTab("expenses")} icon="💰" label="Gastos" badge={(data.expenses || []).length} />
         <Tab active={tab === "itinerary"} onClick={() => setTab("itinerary")} icon="📋" label="Plan" />
         <Tab active={tab === "tickets"} onClick={() => setTab("tickets")} icon="📁" label="Docs" badge={(data.documents || []).length || null} />
-        <Tab active={tab === "checklist"} onClick={() => setTab("checklist")} icon="✅" label="Equipaje" badge={(data.checklist || []).filter(i => !i.checked).length || null} />
+        <Tab active={tab === "checklist"} onClick={() => setTab("checklist")} icon="✅" label="Equip." badge={(data.checklist || []).filter(i => !i.checked).length || null} />
       </div>
     </div>
   );
