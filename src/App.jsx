@@ -1647,14 +1647,14 @@ function PendingSection() {
     { cat: "✈️ Vuelo", item: "Dallas → Orlando", detail: "SW 22/6, 6:50pm → 10:15pm · $203/pax", url: "https://www.southwest.com", urgency: "alta" },
     { cat: "🏨 Hotel", item: "Las Vegas (17–19/6)", detail: "MGM Grand $562 / Sheraton $328-457 / Hilton Polo Towers $466", url: null, urgency: "alta" },
     { cat: "🏨 Hotel", item: "Orlando (22–27/6)", detail: "Vistana $580 reembolsable", url: null, urgency: "alta" },
-    { cat: "🚗 Auto", item: "Las Vegas → Grand Canyon → Phoenix", detail: "Rentar en LV, devolver en PHX · 19–21/6", url: null, urgency: "alta" },
+
     { cat: "🚁 Actividad", item: "Helicóptero Papillon Grand Canyon", detail: "~$200-250/pax · 20/6 · papillon.com", url: "https://www.papillon.com", urgency: "alta" },
     { cat: "🎪 Actividad", item: "Cirque du Soleil 'O' Las Vegas", detail: "~$100+/pax · 18/6 · en el Bellagio", url: "https://www.cirquedusoleil.com/o", urgency: "media" },
     { cat: "🌉 Actividad", item: "Grand Canyon West Skywalk", detail: "Paquete ~$50 + Skywalk ~$60 · grandcanyonwest.com", url: "https://grandcanyonwest.com", urgency: "alta" },
     { cat: "🌆 Actividad", item: "One World Observatory NYC", detail: "~$45/pax · 12/6 · oneworldobservatory.com", url: "https://www.oneworldobservatory.com", urgency: "media" },
     { cat: "🍹 Actividad", item: "Westlight Rooftop Brooklyn", detail: "Reservar mesa · 13/6", url: "https://www.westlightnyc.com", urgency: "media" },
     { cat: "🏔️ Actividad", item: "Cathedral Rock Trail (Sedona)", detail: "Red Rock Pass $5 · recreation.gov · 21/6", url: "https://www.recreation.gov", urgency: "media" },
-    { cat: "✅ Verificar", item: "Fechas Grand Canyon IHG", detail: "Excel dice 19/7–21/7 — debería ser 19–21/6", url: null, urgency: "alta" },
+
     { cat: "✅ Verificar", item: "Duplicado hoteles Dallas", detail: "Hampton Inn + Irving Las Colinas — verificar cuál es el correcto", url: null, urgency: "media" },
   ];
 
@@ -1798,7 +1798,7 @@ export default function App() {
         <Tab active={tab === "itinerary"} onClick={() => setTab("itinerary")} icon="📋" label="Plan" />
         <Tab active={tab === "tickets"} onClick={() => setTab("tickets")} icon="📁" label="Docs" badge={(data.documents || []).length || null} />
         <Tab active={tab === "checklist"} onClick={() => setTab("checklist")} icon="✅" label="Equip." badge={(data.checklist || []).filter(i => !i.checked).length || null} />
-        <Tab active={tab === "pending"} onClick={() => setTab("pending")} icon="📌" label="Pend." badge={12} />
+        <Tab active={tab === "pending"} onClick={() => setTab("pending")} icon="📌" label="Pend." badge={10} />
       </div>
     </div>
   );
