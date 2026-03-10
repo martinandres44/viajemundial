@@ -561,6 +561,7 @@ function DashboardSection({ data, updateData }) {
       })()}
 
 
+      {topCategory && (
         <Card style={{ marginBottom: 12 }}>
           <div style={{ fontSize: 11, color: "#8892A4", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Mayor gasto</div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
