@@ -66,6 +66,19 @@ const BANKS = [
   { id: "icbc", label: "ICBC", color: "#C8102E" },
 ];
 
+const CITY_COLORS = {
+  bsas:   { bg: "#1A3A6B", accent: "#75AADB", label: "Buenos Aires" },
+  nyc:    { bg: "#1A2E4A", accent: "#60A5FA", label: "Nueva York 🗽" },
+  kc:     { bg: "#2D1A4A", accent: "#A78BFA", label: "Kansas City ⚽" },
+  vegas:  { bg: "#4A2A00", accent: "#FFE66D", label: "Las Vegas 🎰" },
+  canyon: { bg: "#3D1A00", accent: "#F97316", label: "Grand Canyon 🏜️" },
+  sedona: { bg: "#4A1A0A", accent: "#EF4444", label: "Sedona 🔴" },
+  dallas: { bg: "#0D2D1A", accent: "#34D399", label: "Dallas ⭐" },
+  orlando:{ bg: "#1A2D3D", accent: "#38BDF8", label: "Orlando 🏰" },
+  miami:  { bg: "#0D2D2D", accent: "#2DD4BF", label: "Miami 🏖️" },
+};
+const getCityStyle = (city) => CITY_COLORS[city] || { bg: "rgba(255,255,255,0.04)", accent: "#00D4AA", label: "" };
+
 const ColorDot = ({ color, size = 10 }) => (
   <span style={{ display: "inline-block", width: size, height: size, borderRadius: "50%", background: color, flexShrink: 0, border: "1.5px solid rgba(255,255,255,0.15)" }} />
 );
@@ -104,24 +117,32 @@ const DEFAULT_DATA = {
   tickets: [],
   expenses: [],
   itinerary: [
-    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Miami", activities: "17:10 - Vuelo AEP → LIM (Aerolíneas Argentinas)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Miami 06:54 del día siguiente" },
-    { id: "d2", date: "2026-06-12", title: "Miami → NYC ✈️", activities: "06:54 - Llegada a Miami\n09:59 - Vuelo MIA → NYC (American Airlines)\n13:01 - Llegada a New York", notes: "Conexión en Miami, vuelo a NYC" },
-    { id: "d3", date: "2026-06-13", title: "NYC 🗽", activities: "Día libre en New York\nManhattan\nTimes Square\nCentral Park\nBrooklyn Bridge", notes: "Primer día completo en NYC" },
-    { id: "d4", date: "2026-06-14", title: "NYC 🗽", activities: "Día libre en New York\nStatue of Liberty\nWall Street\nSoHo / Chelsea", notes: "Segundo día en NYC" },
-    { id: "d5", date: "2026-06-15", title: "NYC → Kansas City ✈️", activities: "Día libre en NYC por la mañana\nPreparar para Kansas", notes: "Vuelo al día siguiente temprano" },
-    { id: "d6", date: "2026-06-16", title: "Kansas City ⚽ ARGENTINA vs ARGELIA", activities: "08:55 - Vuelo NYC → Kansas City (Southwest)\n11:05 - Llegada a Kansas City\n⚽ ARGENTINA 🇦🇷 vs ARGELIA 🇩🇿 - Partido 1 del Mundial", notes: "🏟️ Primer partido de Argentina en el Mundial 2026" },
-    { id: "d7", date: "2026-06-17", title: "Kansas → Las Vegas ✈️🎰", activities: "08:45 - Vuelo MCI → LAS (Southwest)\n09:45 - Llegada a Las Vegas\nRetirar auto rental\nCheck-in hotel\nExplorar el Strip", notes: "Empieza tramo Las Vegas + Grand Canyon" },
-    { id: "d8", date: "2026-06-18", title: "Las Vegas 🎰", activities: "Día libre en Las Vegas\nCasinos\nShows\nFremont Street\nPools", notes: "Día completo en Vegas" },
-    { id: "d9", date: "2026-06-19", title: "Viaje a Grand Canyon 🏜️", activities: "Salida temprano en auto\nRuta Las Vegas → Grand Canyon (~4hs)\nGrand Canyon National Park\nSouth Rim viewpoints", notes: "Ruta por la I-40, llevar agua y protector solar" },
-    { id: "d10", date: "2026-06-20", title: "Grand Canyon 🏜️", activities: "Grand Canyon - Día completo\nHiking trails\nMirador Desert View\nRegreso a Las Vegas o Phoenix", notes: "Definir si volvemos a Vegas o seguimos a Phoenix" },
-    { id: "d11", date: "2026-06-21", title: "Phoenix → Dallas ✈️", activities: "Devolver auto rental\n18:55 - Vuelo PHX → DFW (Southwest)\n23:20 - Llegada a Dallas", notes: "Llegada tarde a Dallas" },
-    { id: "d12", date: "2026-06-22", title: "Dallas ⚽ ARGENTINA vs AUSTRIA", activities: "⚽ ARGENTINA 🇦🇷 vs AUSTRIA 🇦🇹 - Partido 2 del Mundial\n18:50 - Vuelo DFW → MCO (Southwest)\n22:15 - Llegada a Orlando", notes: "🏟️ Segundo partido de Argentina · Vuelo nocturno a Orlando" },
-    { id: "d13", date: "2026-06-23", title: "Orlando 🏰", activities: "Retirar auto rental\nDía libre en Orlando\nDisney Springs\nInternational Drive", notes: "Primer día en Orlando" },
-    { id: "d14", date: "2026-06-24", title: "Orlando 🏰", activities: "Día libre en Orlando\nParques temáticos\nUniversal / Disney / SeaWorld", notes: "Día de parques" },
-    { id: "d15", date: "2026-06-25", title: "Miami o Siesta Key 🏖️", activities: "Devolver auto Orlando\nViaje a Miami o Siesta Key\nPlaya y relax", notes: "Definir destino final" },
-    { id: "d16", date: "2026-06-26", title: "Miami o Siesta Key 🏖️", activities: "Playa y relax\nExplorar zona", notes: "Días de descanso" },
-    { id: "d17", date: "2026-06-27", title: "Miami o Siesta Key 🏖️", activities: "Último día de playa\nPreparar para la vuelta", notes: "Penúltimo día" },
-    { id: "d18", date: "2026-06-28", title: "Vuelta a Buenos Aires ✈️", activities: "17:35 - Vuelo MIA → LIM (American Airlines)\n22:40 - Vuelo LIM → AEP (Aerolíneas Argentinas)", notes: "Llegada a Buenos Aires 05:00 del 29" },
+    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Miami ✈️", city: "bsas", activities: "17:10 - Vuelo AEP → LIM (Aerolíneas Argentinas)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Miami 06:54 del 12/6" },
+    { id: "d2", date: "2026-06-12", title: "Miami → Nueva York — Llegada 🗽", city: "nyc",
+  activities: "06:54 - Llegada a Miami MIA · estirar piernas, café\n09:59 - Vuelo MIA→NYC American Airlines · $204/pax\n13:01 - Llegada a LGA/JFK · AirTrain + subway E al hotel (~$8.50) o taxi (~$55-70)\n14:00 - Check-in DoubleTree Hilton · dejar equipaje aunque no haya cuarto\n14:30 - Almuerzo en Hells Kitchen · 9th Ave entre 45th-55th · Sate Kampar o Danji (cocina coreana)\n15:30 - Times Square · primera impresión · toméense la foto clásica en el centro · entrar al M&Ms World o TKTS para ver precios Broadway\n16:30 - 5th Avenue · caminata desde 42nd hacia el norte · frente al Rockefeller Center · St. Patrick Cathedral · entrada libre\n17:00 - Grand Central Terminal · Main Concourse · techo con constelaciones · Whispering Gallery en la esquina noreste del nivel inferior · acústica increíble · gratis\n18:30 - One World Observatory · reservar ANTES del viaje · ~$45/pax · mejor al atardecer · piso 100 · vistas 360° de Manhattan\n20:30 - Cena en Lower Manhattan · Stone Street (la calle de adoquines más antigua de NYC) · ambiente de pub · buena cerveza\n22:00 - Paseo nocturno por el puente de Brooklyn desde Manhattan si tienen energía",
+  notes: "💡 AirTrain desde JFK + subway E/A al centro cuesta $8.50 vs taxi $60+. Reservar One World Observatory ANTES del viaje en oneworldobservatory.com." },
+    { id: "d3", date: "2026-06-13", title: "NYC — The Met + Central Park + Brooklyn 🗽", city: "nyc",
+  activities: "08:00 - Desayuno americano en diner local · Lexington Candy Shop (Upper East Side) o E.A.T. · huevos, bagel, jugo\n09:30 - The Metropolitan Museum of Art · llegar antes de las 10am · entrada ~$30/pax · impresionismo europeo (sala 800-830) · sala egipcia con el Templo de Dendur · arte medieval · armaduras del siglo XVI · mínimo 2.5hs · azotea abierta en verano con vistas al parque\n12:00 - Almuerzo en el Café del Met o en el parque con algo de la entrada\n13:00 - Central Park desde la 5th Ave ·  Conservatory Garden → Jackie Kennedy Onassis Reservoir (4km de lago) → Bow Bridge (foto icónica · la más fotografiada del parque) → Bethesda Fountain y Terrace → Strawberry Fields (tributo a John Lennon · mosaico Imagine) → Tavern on the Green exterior\n15:30 - Salida del parque hacia el sur · Madison Avenue o Lexington · vidriera de tiendas\n16:30 - Subway a Brooklyn · línea 2/3 a Clark St o A/C a High St\n17:00 - DUMBO (Down Under the Manhattan Bridge Overpass) · foto obligatoria desde Washington St con el puente de Brooklyn y el skyline · Jane's Carousel (carrusel histórico frente al East River · $2)\n17:45 - Brooklyn Bridge caminando · desde el lado de Brooklyn hacia Manhattan · 30-40 min cruzando · mejor con luz del atardecer\n19:30 - Cena en DUMBO o Brooklyn Heights · Juliana's Pizza (rival histórica de Grimaldi's · debajo del puente) o Time Out Market Brooklyn\n21:00 - Westlight Rooftop Bar · William Vale Hotel piso 22 en Williamsburg · vistas increíbles de Manhattan · reservar mesa con anticipación",
+  notes: "💡 Tarjeta OMNY semanal ilimitada ~$34/persona — comprar el primer día. The Met: el precio es técnicamente sugerido pero pagar menos puede generar demora en entrada." },
+    { id: "d4", date: "2026-06-14", title: "NYC — High Line + Chelsea + Midtown 🗽", city: "nyc",
+  activities: "08:30 - Desayuno en West Village · Buvette (bistro francés · Barrow St) o Joe Coffee (tostadas y cortado) · ambiente de neighborhood local\n10:00 - High Line · entrar en la calle Gansevoort St (extremo sur) y caminar hacia el norte hasta 34th St · 2.3km · arte instalado entre las vías · vistas al Hudson River · paseo sobre los techos de Chelsea · completamente gratis\n11:30 - Chelsea Market · entrar por 9th Ave entre 15th y 16th · Los Tacos No.1 (los mejores tacos de NYC según todo el mundo) · The Lobster Place para mariscos · helado de Big Gay Ice Cream · pasar 1hs\n13:00 - Galería de arte en Chelsea · Gagosian Gallery o David Zwirner · entrada libre · arte contemporáneo de primer nivel mundial\n14:00 - MoMA (Museum of Modern Art) · ~$30/pax · Starry Night de Van Gogh · Warhol · Picasso · Water Lilies de Monet · colección de diseño industrial · 2hs mínimo · abre los domingos\n16:30 - Rockefeller Center · Top of the Rock · ~$40/pax · mejor vista del Empire State (lo ves desde afuera) · alternativa al One World si no lo hicieron · reservar online\n18:30 - Radio City Music Hall · exterior · 6th Avenue y 50th St · foto · arquitectura Art Deco\n19:00 - Cena en Koreatown · 32nd St entre 5th y 6th Ave (Koreatown block) · K-BBQ a la mesa · Jongro BBQ o Kang Suh · abiertos hasta tarde\n21:00 - Empire State Building nocturno opcional · ~$44/pax · luces de noche · o caminata por Midtown iluminado",
+  notes: "💡 Si ya hicieron One World Observatory, Top of the Rock es distinto: ven el Empire State iluminado. Ambos valen la pena pero son $40 c/u." },
+    { id: "d5", date: "2026-06-15", title: "NYC — Financial District + SoHo + Despedida 🗽", city: "nyc",
+  activities: "08:30 - Desayuno rápido cerca del hotel · o bagel con salmón en cualquier deli de la 7th Ave · desayuno neoyorquino clásico\n09:15 - Subway al Financial District · línea 1/2/3 a Fulton St\n09:30 - Wall Street · New York Stock Exchange · Charging Bull en Bowling Green · Fearless Girl frente al NYSE · caminata por Nassau St\n10:00 - 9/11 Memorial & Museum · los dos estanques reflectantes donde estaban las Torres Gemelas · los nombres grabados · momento de silencio · entrada al museo ~$30 o solo al memorial gratis · 45min\n11:00 - Oculus (WTC Transportation Hub) · arquitectura de Santiago Calatrava · mariposa de acero abriendo las alas · interior blanco impresionante · gratis · foto interior obligatoria\n11:45 - Brookfield Place / Hudson Eats · vista al Hudson River · ideal para almorzar o tomar algo · terraza exterior\n13:00 - Ferry de East River ($4) desde Pier 11/Wall St hacia Brooklyn Heights o cruzar Manhattan Bridge a pie\n14:00 - SoHo · bajar por Broadway desde Houston St · galerías de arte · arquitectura de hierro fundido del siglo XIX · tiendas · Prince St · Spring St · bueno para compras de último momento\n15:30 - Washington Square Park · Arco de Triunfo · músicos de jazz · jugadores de ajedrez al aire libre · ambiente universitario de NYU · gratis\n16:30 - Little Italy · Mulberry St · caffè y cannoli en Caffe Palermo o Ferrara Bakery (desde 1892) · caminata breve\n17:00 - Chinatown · Canal St · caldos y dim sum · el contraste con Manhattan es brutal\n18:30 - TKTS Times Square · comprar entradas Broadway con 50% descuento para show nocturno · Hamilton · Chicago · Wicked · llegar 30min antes de que abra la boletería\n20:00 - Cena pre-show en Midtown · cena rápida antes del teatro\n21:00 - Show de Broadway (opcional) \n22:30 - Preparar equipaje · vuelo mañana 8:55am",
+  notes: "⚠️ Vuelo mañana 8:55am — Uber a las 6:15am MÁXIMO. Preparar todo esta noche. De LGA son ~40min sin tráfico, de JFK ~1hs." },
+    { id: "d6", date: "2026-06-16", title: "Kansas City ⚽ PARTIDO 1 🇦🇷", city: "kc", activities: "06:15 - Uber al aeropuerto\n08:55 - Vuelo NYC → Kansas City (Southwest)\n11:05 - Llegada · retirar auto Hertz\n22:00 - ⚽ ARGENTINA 🇦🇷 vs ARGELIA 🇩🇿 · Partido 1 del Mundial", notes: "🏟️ Primer partido. Llegar al estadio 2hs antes." },
+    { id: "d7", date: "2026-06-17", title: "Kansas → Las Vegas ✈️🎰", city: "vegas", activities: "08:45 - Vuelo MCI → LAS (Southwest)\n09:45 - Llegada · retirar auto rental\n12:00 - The Strip · MGM, Bellagio, Caesars\n20:00 - Fremont Street Experience · shows LED gratuitos", notes: "Acostarse temprano — viernes 19/6 salida 6:30am." },
+    { id: "d8", date: "2026-06-18", title: "Las Vegas 🎰", city: "vegas", activities: "10:00 - Pool day en el hotel · 40°C afuera\n16:00 - Fuentes del Bellagio · show gratuito\n19:30 - Cirque du Soleil O en el Bellagio · ~$100+/pax · RESERVAR", notes: "⚠️ Acostarse temprano — mañana salida 6:30am al Grand Canyon." },
+    { id: "d9", date: "2026-06-19", title: "West Rim Skywalk + South Rim 🏜️", city: "canyon", activities: "06:30 - Salida desde Las Vegas\n09:00 - Skywalk Eagle Point · paquete ~$50 + Skywalk ~$60 · grandcanyonwest.com · no entran cámaras\n11:00 - Guano Point · mejor panorámica · almorzar acá\n12:30 - Salida hacia South Rim (~2.5hs)\n15:30 - Visitor Center · Mather Point\n17:00 - Desert View Watchtower · cierra 18hs", notes: "💡 EL DÍA LARGO. Fotos oficiales Skywalk ~$25. Pase South Rim $35/auto." },
+    { id: "d10", date: "2026-06-20", title: "Grand Canyon — Trek + Helicóptero 🚁", city: "canyon", activities: "06:00 - Bright Angel Trail · SALIR ANTES DEL CALOR · solo hasta 1.5 Mile Resthouse · 2L agua/persona\n10:00 - Papillon Helicopters · ~30 min · ~$200-250/pax · RESERVAR\n12:30 - Miradores South Rim · shuttle gratuito · Hopi Point\n16:00 - Salida hacia Phoenix (~4hs)", notes: "⚠️ 45°C abajo en junio. NUNCA bajar más del 1.5 Mile Resthouse." },
+    { id: "d11", date: "2026-06-21", title: "Sedona + Phoenix → Dallas 🔴✈️", city: "sedona", activities: "08:30 - Airport Mesa Vortex · vistas panorámicas\n09:45 - Cathedral Rock Trail · 2.5km · Red Rock Pass $5\n12:00 - Chapel of the Holy Cross · entrada gratuita\n12:45 - Tlaquepaque Arts Village · almorzar\n15:00 - SALIDA hacia Phoenix\n16:30 - Old Town Scottsdale · cerveza de despedida\n18:55 - Vuelo PHX → Dallas (Southwest)", notes: "Salir de Sedona a las 15hs máximo. Aeropuerto PHX a las 17:15hs." },
+    { id: "d12", date: "2026-06-22", title: "Dallas ⚽ PARTIDO 2 🇦🇷", city: "dallas", activities: "09:30 - Salir del Hampton Inn en Uber/Lyft\n⚠️ Ruta: Hampton Inn → I-30 W → TX-360 S → AT&T Way · ~30km · 40-60min\n12:00 - ⚽ ARGENTINA 🇦🇷 vs AUSTRIA 🇦🇹 · AT&T Stadium Arlington\n17:30 - Uber al aeropuerto DFW\n18:50 - Vuelo DFW → Orlando (Southwest)", notes: "⚠️ Vuelo 18:50 — tiempo justo post partido. Tener Uber pedido ANTES de salir del estadio." },
+    { id: "d13", date: "2026-06-23", title: "Orlando 🏰", city: "orlando", activities: "Descanso post partido y viaje\nDisney Springs · International Drive · Universal CityWalk", notes: "Día de recuperación. Definir parques." },
+    { id: "d14", date: "2026-06-24", title: "Orlando — Parques 🏰", city: "orlando", activities: "Parques temáticos · Universal / Disney / SeaWorld\nReservar tickets online con anticipación", notes: "El parque que elijan el día anterior." },
+    { id: "d15", date: "2026-06-25", title: "Miami o Siesta Key 🏖️", city: "miami", activities: "Devolver auto Orlando\nViaje a Miami Beach o Siesta Key\nCheck-in · playa y relax", notes: "⏳ Destino final aún por definir." },
+    { id: "d16", date: "2026-06-26", title: "Playa — Relax total 🏖️", city: "miami", activities: "Playa y relax\nRestaurantes · atardecer", notes: "Días de descanso merecidos." },
+    { id: "d17", date: "2026-06-27", title: "Último día de playa 🏖️", city: "miami", activities: "Último día de relax\nCena de despedida del viaje", notes: "Penúltimo día." },
+    { id: "d18", date: "2026-06-28", title: "Vuelta a Buenos Aires ✈️🇦🇷", city: "bsas", activities: "17:35 - Vuelo MIA → LIM (American Airlines)\n22:40 - Vuelo LIM → AEP (Aerolíneas Argentinas)", notes: "Llegada a Buenos Aires 05:00 del 29/6. ¡Fin del viaje!" },
   ],
   budget: { total: 0, currency: "USD" },
   checklist: [
@@ -507,7 +528,39 @@ function DashboardSection({ data, updateData }) {
         </Card>
       )}
 
-      {topCategory && (
+      {/* Matches countdown cards */}
+      {(() => {
+        const matches = [
+          { date: "2026-06-16", time: "22:00", rival: "Argelia 🇩🇿", city: "Kansas City", stadium: "Arrowhead Stadium", num: 1 },
+          { date: "2026-06-22", time: "12:00", rival: "Austria 🇦🇹", city: "Dallas (Arlington)", stadium: "AT&T Stadium", num: 2 },
+        ];
+        return matches.map(match => {
+          const matchDt = new Date(`${match.date}T${match.time}:00`);
+          const now = getUSNow();
+          const diffMs = matchDt - now;
+          const diffDays = Math.floor(diffMs / 86400000);
+          const diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+          const passed = diffMs < 0;
+          return (
+            <div key={match.num} style={{ marginBottom: 12, borderRadius: 16, overflow: "hidden", border: "1px solid rgba(196,160,0,0.25)", background: "linear-gradient(135deg, rgba(26,42,107,0.6) 0%, rgba(40,20,80,0.6) 100%)" }}>
+              <div style={{ padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ fontSize: 11, color: "#FFE66D", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>⚽ Partido {match.num} — {match.city}</div>
+                {!passed && <div style={{ fontSize: 12, color: "#00D4AA", fontWeight: 700 }}>{diffDays > 0 ? `${diffDays}d ${diffHrs}h` : diffHrs > 0 ? `${diffHrs}h` : "¡HOY!"}</div>}
+                {passed && <div style={{ fontSize: 11, color: "#6B7280" }}>Jugado</div>}
+              </div>
+              <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 16 }}>
+                <div style={{ fontSize: 36 }}>🇦🇷</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 17, fontWeight: 800, color: "#E8ECF4" }}>Argentina vs {match.rival}</div>
+                  <div style={{ fontSize: 12, color: "#8892A4", marginTop: 3 }}>{match.date.slice(8)}/{match.date.slice(5,7)} · {match.time}hs · {match.stadium}</div>
+                </div>
+              </div>
+            </div>
+          );
+        });
+      })()}
+
+
         <Card style={{ marginBottom: 12 }}>
           <div style={{ fontSize: 11, color: "#8892A4", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Mayor gasto</div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -1368,7 +1421,7 @@ function ItinerarySection({ data, updateData }) {
           ← Itinerario
         </button>
 
-        <Card style={{ borderColor: isToday ? "rgba(0,212,170,0.4)" : undefined, background: isToday ? "rgba(0,212,170,0.04)" : undefined }}>
+        <Card style={{ borderColor: isToday ? "rgba(0,212,170,0.4)" : viewDay.city ? `${getCityStyle(viewDay.city).accent}35` : undefined, background: isToday ? "rgba(0,212,170,0.04)" : viewDay.city ? `${getCityStyle(viewDay.city).bg}30` : undefined }}>
           {isToday && (
             <div style={{ fontSize: 10, color: "#00D4AA", fontWeight: 800, textTransform: "uppercase", letterSpacing: 2, marginBottom: 12, display: "flex", alignItems: "center", gap: 6 }}>
               <span style={{ width: 6, height: 6, borderRadius: 3, background: "#00D4AA", animation: "pulse 1.5s infinite" }} /> Hoy
@@ -1378,8 +1431,8 @@ function ItinerarySection({ data, updateData }) {
           {!editing ? (
             <>
               {/* Day header */}
-              <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
-                {dayLabel} {viewDay.date?.slice(5)} — Día {dayIdx + 1}
+              <div style={{ fontSize: 11, color: viewDay.city ? getCityStyle(viewDay.city).accent : "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
+                {viewDay.city ? getCityStyle(viewDay.city).label : ""} — {dayLabel} {viewDay.date?.slice(5)} · Día {dayIdx + 1}
               </div>
               <div style={{ fontSize: 22, fontWeight: 800, color: "#E8ECF4", marginBottom: 18, fontFamily: "'Playfair Display', serif" }}>{viewDay.title}</div>
 
@@ -1493,16 +1546,16 @@ function ItinerarySection({ data, updateData }) {
         const isToday = day.date === today;
 
         return (
-          <Card key={day.id} onClick={() => openDetail(day)} style={{ marginBottom: 10, padding: 14, cursor: "pointer", borderColor: isToday ? "rgba(0,212,170,0.4)" : undefined, background: isToday ? "rgba(0,212,170,0.06)" : undefined }}>
+          <Card key={day.id} onClick={() => openDetail(day)} style={{ marginBottom: 10, padding: 14, cursor: "pointer", borderColor: isToday ? "rgba(0,212,170,0.4)" : day.city ? `${getCityStyle(day.city).accent}30` : undefined, background: isToday ? "rgba(0,212,170,0.06)" : day.city ? `${getCityStyle(day.city).bg}40` : undefined }}>
             {isToday && <div style={{ fontSize: 10, color: "#00D4AA", fontWeight: 800, textTransform: "uppercase", letterSpacing: 2, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: 3, background: "#00D4AA", animation: "pulse 1.5s infinite" }} /> Hoy</div>}
             {/* Header with date box */}
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: day.activities ? 10 : 0 }}>
-              <div style={{ width: 42, height: 42, borderRadius: 12, background: isToday ? "rgba(0,212,170,0.15)" : "rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <div style={{ fontSize: 9, color: isToday ? "#00D4AA" : "#6B7280", fontWeight: 700, textTransform: "uppercase", lineHeight: 1 }}>{dayLabel}</div>
-                <div style={{ fontSize: 16, fontWeight: 800, color: isToday ? "#00D4AA" : "#E8ECF4", lineHeight: 1.2 }}>{d ? d.getDate() : "?"}</div>
+              <div style={{ width: 42, height: 42, borderRadius: 12, background: isToday ? "rgba(0,212,170,0.15)" : day.city ? `${getCityStyle(day.city).accent}20` : "rgba(255,255,255,0.06)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div style={{ fontSize: 9, color: isToday ? "#00D4AA" : day.city ? getCityStyle(day.city).accent : "#6B7280", fontWeight: 700, textTransform: "uppercase", lineHeight: 1 }}>{dayLabel}</div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: isToday ? "#00D4AA" : day.city ? getCityStyle(day.city).accent : "#E8ECF4", lineHeight: 1.2 }}>{d ? d.getDate() : "?"}</div>
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Día {idx + 1}</div>
+                <div style={{ fontSize: 11, color: day.city ? getCityStyle(day.city).accent : "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>{day.city ? getCityStyle(day.city).label : `Día ${idx + 1}`}</div>
                 <div style={{ fontSize: 15, fontWeight: 700, color: "#E8ECF4", marginTop: 2 }}>{day.title}</div>
               </div>
               <span style={{ color: "#4B5563", fontSize: 14, flexShrink: 0 }}>›</span>
@@ -1588,7 +1641,74 @@ function ChecklistSection({ data, updateData }) {
   );
 }
 
-// ========== MAIN APP ==========
+function PendingSection() {
+  const PENDING_ITEMS = [
+    { cat: "✈️ Vuelo", item: "Dallas → Orlando", detail: "SW 22/6, 6:50pm → 10:15pm · $203/pax", url: "https://www.southwest.com", urgency: "alta" },
+    { cat: "🏨 Hotel", item: "Las Vegas (17–19/6)", detail: "MGM Grand $562 / Sheraton $328-457 / Hilton Polo Towers $466", url: null, urgency: "alta" },
+    { cat: "🏨 Hotel", item: "Orlando (22–27/6)", detail: "Vistana $580 reembolsable", url: null, urgency: "alta" },
+    { cat: "🚗 Auto", item: "Las Vegas → Grand Canyon → Phoenix", detail: "Rentar en LV, devolver en PHX · 19–21/6", url: null, urgency: "alta" },
+    { cat: "🚁 Actividad", item: "Helicóptero Papillon Grand Canyon", detail: "~$200-250/pax · 20/6 · papillon.com", url: "https://www.papillon.com", urgency: "alta" },
+    { cat: "🎪 Actividad", item: "Cirque du Soleil 'O' Las Vegas", detail: "~$100+/pax · 18/6 · en el Bellagio", url: "https://www.cirquedusoleil.com/o", urgency: "media" },
+    { cat: "🌉 Actividad", item: "Grand Canyon West Skywalk", detail: "Paquete ~$50 + Skywalk ~$60 · grandcanyonwest.com", url: "https://grandcanyonwest.com", urgency: "alta" },
+    { cat: "🌆 Actividad", item: "One World Observatory NYC", detail: "~$45/pax · 12/6 · oneworldobservatory.com", url: "https://www.oneworldobservatory.com", urgency: "media" },
+    { cat: "🍹 Actividad", item: "Westlight Rooftop Brooklyn", detail: "Reservar mesa · 13/6", url: "https://www.westlightnyc.com", urgency: "media" },
+    { cat: "🏔️ Actividad", item: "Cathedral Rock Trail (Sedona)", detail: "Red Rock Pass $5 · recreation.gov · 21/6", url: "https://www.recreation.gov", urgency: "media" },
+    { cat: "✅ Verificar", item: "Fechas Grand Canyon IHG", detail: "Excel dice 19/7–21/7 — debería ser 19–21/6", url: null, urgency: "alta" },
+    { cat: "✅ Verificar", item: "Duplicado hoteles Dallas", detail: "Hampton Inn + Irving Las Colinas — verificar cuál es el correcto", url: null, urgency: "media" },
+  ];
+
+  const alta = PENDING_ITEMS.filter(i => i.urgency === "alta");
+  const media = PENDING_ITEMS.filter(i => i.urgency === "media");
+
+  return (
+    <div>
+      <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", marginBottom: 4, fontFamily: "'Playfair Display', serif" }}>📌 Pendientes</div>
+      <div style={{ fontSize: 12, color: "#8892A4", marginBottom: 16 }}>{PENDING_ITEMS.length} items · {alta.length} urgentes</div>
+
+      <div style={{ fontSize: 12, color: "#FF6B6B", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
+        🔴 Urgentes
+      </div>
+      {alta.map((item, i) => (
+        <div key={i} style={{ marginBottom: 8, borderRadius: 14, background: "rgba(255,107,107,0.06)", border: "1px solid rgba(255,107,107,0.15)", padding: "12px 14px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 11, color: "#FF6B6B", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 3 }}>{item.cat}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4" }}>{item.item}</div>
+              <div style={{ fontSize: 12, color: "#8892A4", marginTop: 3, lineHeight: 1.4 }}>{item.detail}</div>
+            </div>
+            {item.url && (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ flexShrink: 0, padding: "6px 12px", background: "rgba(0,212,170,0.12)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 8, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
+                Reservar →
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+
+      <div style={{ fontSize: 12, color: "#FFE66D", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, margin: "16px 0 8px", display: "flex", alignItems: "center", gap: 6 }}>
+        🟡 Media prioridad
+      </div>
+      {media.map((item, i) => (
+        <div key={i} style={{ marginBottom: 8, borderRadius: 14, background: "rgba(255,230,109,0.04)", border: "1px solid rgba(255,230,109,0.12)", padding: "12px 14px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 11, color: "#FFE66D", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 3 }}>{item.cat}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4" }}>{item.item}</div>
+              <div style={{ fontSize: 12, color: "#8892A4", marginTop: 3, lineHeight: 1.4 }}>{item.detail}</div>
+            </div>
+            {item.url && (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ flexShrink: 0, padding: "6px 12px", background: "rgba(255,230,109,0.1)", border: "1px solid rgba(255,230,109,0.2)", borderRadius: 8, fontSize: 11, color: "#FFE66D", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
+                Reservar →
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+
 
 export default function App() {
   const [data, setData] = useState(DEFAULT_DATA);
@@ -1647,6 +1767,7 @@ export default function App() {
     tickets: <DocumentsSection data={data} updateData={updateData} />,
     itinerary: <ItinerarySection data={data} updateData={updateData} />,
     checklist: <ChecklistSection data={data} updateData={updateData} />,
+    pending: <PendingSection />,
   };
 
   return (
@@ -1676,6 +1797,7 @@ export default function App() {
         <Tab active={tab === "itinerary"} onClick={() => setTab("itinerary")} icon="📋" label="Plan" />
         <Tab active={tab === "tickets"} onClick={() => setTab("tickets")} icon="📁" label="Docs" badge={(data.documents || []).length || null} />
         <Tab active={tab === "checklist"} onClick={() => setTab("checklist")} icon="✅" label="Equip." badge={(data.checklist || []).filter(i => !i.checked).length || null} />
+        <Tab active={tab === "pending"} onClick={() => setTab("pending")} icon="📌" label="Pend." badge={12} />
       </div>
     </div>
   );
