@@ -1932,7 +1932,7 @@ export default function App() {
     tickets: <DocumentsSection data={data} updateData={updateData} />,
     itinerary: <ItinerarySection data={data} updateData={updateData} />,
     checklist: <ChecklistSection data={data} updateData={updateData} />,
-    pending: <PendingSection data={data} update={update} />,
+    pending: <PendingSection data={data} update={updateData} />,
   };
 
   return (
