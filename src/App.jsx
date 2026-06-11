@@ -9,15 +9,15 @@ const SHEETS_URL = "TU_APPS_SCRIPT_URL";
 // Weather - changes based on current city (default: NYC as central point)
 // City coordinates for dynamic weather
 const CITY_COORDS = {
-  bsas:    { lat: -34.6037, lon: -58.3816, tz: "America/Argentina/Buenos_Aires", name: "Buenos Aires"  },
-  nyc:     { lat:  40.7128, lon: -74.0060, tz: "America/New_York",               name: "Nueva York"    },
-  kc:      { lat:  39.0997, lon: -94.5786, tz: "America/Chicago",                name: "Kansas City"   },
-  vegas:   { lat:  36.1699, lon: -115.1398,tz: "America/Los_Angeles",            name: "Las Vegas"     },
-  canyon:  { lat:  36.0544, lon: -112.1401,tz: "America/Phoenix",                name: "Grand Canyon"  },
-  sedona:  { lat:  34.8697, lon: -111.7609,tz: "America/Phoenix",                name: "Sedona"        },
-  dallas:  { lat:  32.7767, lon: -96.7970, tz: "America/Chicago",                name: "Dallas"        },
-  orlando: { lat:  28.5383, lon: -81.3792, tz: "America/New_York",               name: "Orlando"       },
-  miami:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Miami"         },
+  bsas:    { lat: -34.6037, lon: -58.3816, tz: "America/Argentina/Buenos_Aires", name: "Buenos Aires", emoji: "🇦🇷" },
+  nyc:     { lat:  40.7128, lon: -74.0060, tz: "America/New_York",               name: "Nueva York",   emoji: "🗽" },
+  kc:      { lat:  39.0997, lon: -94.5786, tz: "America/Chicago",                name: "Kansas City",  emoji: "⚽" },
+  vegas:   { lat:  36.1699, lon: -115.1398,tz: "America/Los_Angeles",            name: "Las Vegas",    emoji: "🎰" },
+  canyon:  { lat:  36.0544, lon: -112.1401,tz: "America/Phoenix",                name: "Grand Canyon", emoji: "🏜️" },
+  sedona:  { lat:  34.8697, lon: -111.7609,tz: "America/Phoenix",                name: "Sedona",       emoji: "🔴" },
+  dallas:  { lat:  32.7767, lon: -96.7970, tz: "America/Chicago",                name: "Dallas",       emoji: "⭐" },
+  orlando: { lat:  28.5383, lon: -81.3792, tz: "America/New_York",               name: "Orlando",      emoji: "🏰" },
+  miami:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Miami",        emoji: "🏖️" },
 };
 
 const buildWeatherUrl = (cityId) => {
@@ -459,7 +459,7 @@ function WeatherWidget({ itinerary }) {
       {Object.entries(CITY_COORDS).map(([id, c]) => (
         <button key={id} onClick={() => setCurrentCity(id)}
           style={{ flexShrink: 0, padding: "4px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: "pointer", border: `1px solid ${currentCity === id ? "rgba(0,212,170,0.5)" : "rgba(255,255,255,0.08)"}`, background: currentCity === id ? "rgba(0,212,170,0.12)" : "transparent", color: currentCity === id ? "#00D4AA" : "#8892A4", transition: "all .15s" }}>
-          {CITIES[id]?.emoji || "📍"} {c.name.split(" ")[0]}
+          {CITY_COORDS[id]?.emoji || "📍"} {c.name.split(" ")[0]}
         </button>
       ))}
     </div>
@@ -494,7 +494,7 @@ function WeatherWidget({ itinerary }) {
         <CityPicker />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
           <div style={{ fontSize: 11, color: "#00B4D8", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2 }}>
-            {CITIES[currentCity]?.emoji} {cityInfo.name} — ahora
+            {CITY_COORDS[currentCity]?.emoji} {cityInfo.name} — ahora
           </div>
           <button onClick={() => setUseFahrenheit(!useFahrenheit)}
             style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 6, padding: "3px 8px", color: "#8892A4", fontSize: 11, cursor: "pointer", fontWeight: 600 }}>
