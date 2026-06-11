@@ -100,32 +100,32 @@ const ColorDot = ({ color, size = 10 }) => (
 const DEFAULT_DATA = {
   flights: [
     // ─── IDA ───
-    { id:"f1", type:"ida",      airline:"LATAM",              flightNumber:"",    from:"AEP", to:"LIM", date:"2026-06-11", time:"17:35", status:"reservado", notes:"Llegada 20:30 · $497/pax · Asientos 16CDEF (5 pax)", confirmation:"" },
-    { id:"f2", type:"ida",      airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"MIA", date:"2026-06-11", time:"23:59", status:"reservado", notes:"Llegada 06:54 (+1) · $766/pax · 2 valijas + 5 carry on · Asientos 20DE 21DE", confirmation:"" },
+    { id:"f1", type:"ida",      airline:"LATAM",              flightNumber:"",    from:"AEP", to:"LIM", date:"2026-06-11", time:"17:35", status:"confirmado", notes:"Llegada 20:30 · $497/pax · Asientos 16CDEF (5 pax)", confirmation:"" },
+    { id:"f2", type:"ida",      airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"MIA", date:"2026-06-11", time:"23:59", status:"confirmado", notes:"Llegada 06:54 (+1) · $766/pax · 2 valijas + 5 carry on · Asientos 20DE 21DE", confirmation:"" },
     // ─── INTERNOS ───
-    { id:"f3", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"MIA", to:"NYC", date:"2026-06-12", time:"09:59", status:"reservado", notes:"Llegada 13:01 · $204/pax · 5 carry on · $853 total · Asientos 12ABCD", confirmation:"" },
-    { id:"f4", type:"interno",  airline:"Delta",              flightNumber:"",    from:"NYC", to:"MCI", date:"2026-06-16", time:"07:30", status:"reservado", notes:"Llegada 09:48 · $310/pax · 5 carry on · $335 total · Asientos NO asignados aún", confirmation:"" },
-    { id:"f5", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"MCI", to:"LAS", date:"2026-06-17", time:"08:45", status:"reservado", notes:"Llegada 09:45 · $455/pax · 5 carry on · $2,041.64 total · Asientos 20ABCDEF", confirmation:"" },
-    { id:"f6", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"PHX", to:"DAL", date:"2026-06-21", time:"18:55", status:"reservado", notes:"Llegada 23:20 · $238/pax · $1,008 total · Asientos NO asignados aún", confirmation:"" },
-    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"reservado",  notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total · Asientos 22E22F", confirmation:"" },
+    { id:"f3", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"MIA", to:"NYC", date:"2026-06-12", time:"09:59", status:"confirmado", notes:"Llegada 13:01 · $204/pax · 5 carry on · $853 total · Asientos 12ABCD", confirmation:"" },
+    { id:"f4", type:"interno",  airline:"Delta",              flightNumber:"",    from:"NYC", to:"MCI", date:"2026-06-16", time:"07:30", status:"confirmado", notes:"Llegada 09:48 · $310/pax · 5 carry on · $335 total · Asientos NO asignados aún", confirmation:"" },
+    { id:"f5", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"MCI", to:"LAS", date:"2026-06-17", time:"08:45", status:"confirmado", notes:"Llegada 09:45 · $455/pax · 5 carry on · $2,041.64 total · Asientos 20ABCDEF", confirmation:"" },
+    { id:"f6", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"PHX", to:"DAL", date:"2026-06-21", time:"18:55", status:"confirmado", notes:"Llegada 23:20 · $238/pax · $1,008 total · Asientos NO asignados aún", confirmation:"" },
+    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"confirmado",  notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total · Asientos 22E22F", confirmation:"" },
     // ─── VUELTA ───
-    { id:"f8", type:"vuelta",   airline:"LATAM",              flightNumber:"",    from:"MIA", to:"LIM", date:"2026-06-28", time:"15:35", status:"reservado", notes:"Llegada 20:30 · $497/pax · Asientos 20D21E", confirmation:"" },
-    { id:"f9", type:"vuelta",   airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"AEP", date:"2026-06-29", time:"02:00", status:"reservado", notes:"Llegada 08:30 · $766/pax · 2 valijas + 5 carry on · Asientos 18DEF", confirmation:"" },
+    { id:"f8", type:"vuelta",   airline:"LATAM",              flightNumber:"",    from:"MIA", to:"LIM", date:"2026-06-28", time:"15:35", status:"confirmado", notes:"Llegada 20:30 · $497/pax · Asientos 20D21E", confirmation:"" },
+    { id:"f9", type:"vuelta",   airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"AEP", date:"2026-06-29", time:"02:00", status:"confirmado", notes:"Llegada 08:30 · $766/pax · 2 valijas + 5 carry on · Asientos 18DEF", confirmation:"" },
     // ─── VUELTA ALTERNATIVA DALLAS ───
-    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"reservado",  notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total · Asientos 21B — Falta Tomy", confirmation:"" },
+    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"confirmado",  notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total · Asientos 21B — Falta Tomy", confirmation:"" },
   ],
   hotels: [
-    { id:"h1", name:"DoubleTree Hilton",             city:"Nueva York",   address:"569 Lexington Ave, New York, NY 10022",                         checkIn:"2026-06-12", checkOut:"2026-06-16", confirmation:"", cost:2430,    notes:"4 noches", paid:false, status:"reservado" },
-    { id:"h2", name:"Ramada by Wyndham",             city:"Kansas City",  address:"6101 E Frontage Rd, Kansas City, MO 64120",                      checkIn:"2026-06-16", checkOut:"2026-06-17", confirmation:"", cost:217,     notes:"1 noche post partido", paid:false, status:"reservado" },
-    { id:"h3", name:"Planet Hollywood Resort",       city:"Las Vegas",    address:"3667 Las Vegas Blvd S, Las Vegas, NV 89109",                     checkIn:"2026-06-17", checkOut:"2026-06-19", confirmation:"", cost:413,     notes:"2 noches", paid:false, status:"reservado" },
-    { id:"h4", name:"Grand Canyon IHG",              city:"Grand Canyon", address:"Market Plaza, Grand Canyon Village, AZ 86023",                   checkIn:"2026-06-19", checkOut:"2026-06-21", confirmation:"", cost:474,     notes:"2 noches", paid:false, status:"reservado" },
-    { id:"h5", name:"Holiday Inn DFW Airport South", city:"Dallas",       address:"4440 W Airport Fwy, Irving, TX 75062",                           checkIn:"2026-06-21", checkOut:"2026-06-22", confirmation:"", cost:179,     notes:"1 noche · Aeropuerto DFW", paid:false, status:"reservado" },
-    { id:"h6", name:"All Star Movies (Disney)",      city:"Orlando",      address:"1991 W Buena Vista Dr, Lake Buena Vista, FL 32830",              checkIn:"2026-06-22", checkOut:"2026-06-25", confirmation:"", cost:471,     notes:"3 noches", paid:false, status:"reservado" },
-    { id:"h7", name:"Airbnb",                        city:"Siesta Key",   address:"Siesta Key, FL 34242",                                           checkIn:"2026-06-25", checkOut:"2026-06-28", confirmation:"", cost:1029.65, notes:"3 noches · Siesta Key", paid:false, status:"reservado" },
+    { id:"h1", name:"DoubleTree Hilton",             city:"Nueva York",   address:"569 Lexington Ave, New York, NY 10022",                         checkIn:"2026-06-12", checkOut:"2026-06-16", confirmation:"", cost:2430,    notes:"4 noches", paid:false, status:"confirmado" },
+    { id:"h2", name:"Ramada by Wyndham",             city:"Kansas City",  address:"6101 E Frontage Rd, Kansas City, MO 64120",                      checkIn:"2026-06-16", checkOut:"2026-06-17", confirmation:"", cost:217,     notes:"1 noche post partido", paid:false, status:"confirmado" },
+    { id:"h3", name:"Planet Hollywood Resort",       city:"Las Vegas",    address:"3667 Las Vegas Blvd S, Las Vegas, NV 89109",                     checkIn:"2026-06-17", checkOut:"2026-06-19", confirmation:"", cost:413,     notes:"2 noches", paid:false, status:"confirmado" },
+    { id:"h4", name:"Grand Canyon IHG",              city:"Grand Canyon", address:"Market Plaza, Grand Canyon Village, AZ 86023",                   checkIn:"2026-06-19", checkOut:"2026-06-21", confirmation:"", cost:474,     notes:"2 noches", paid:false, status:"confirmado" },
+    { id:"h5", name:"Holiday Inn DFW Airport South", city:"Dallas",       address:"4440 W Airport Fwy, Irving, TX 75062",                           checkIn:"2026-06-21", checkOut:"2026-06-22", confirmation:"", cost:179,     notes:"1 noche · Aeropuerto DFW", paid:false, status:"confirmado" },
+    { id:"h6", name:"All Star Movies (Disney)",      city:"Orlando",      address:"1991 W Buena Vista Dr, Lake Buena Vista, FL 32830",              checkIn:"2026-06-22", checkOut:"2026-06-25", confirmation:"", cost:471,     notes:"3 noches", paid:false, status:"confirmado" },
+    { id:"h7", name:"Airbnb",                        city:"Siesta Key",   address:"Siesta Key, FL 34242",                                           checkIn:"2026-06-25", checkOut:"2026-06-28", confirmation:"", cost:1029.65, notes:"3 noches · Siesta Key", paid:false, status:"confirmado" },
   ],
   cars: [
-    { id:"car1", company:"Alamo", city:"Las Vegas → Phoenix", pickUp:"2026-06-17", dropOff:"2026-06-21", confirmation:"#898251065COUNT", cost:0, notes:"Nissan Rogue · LAS McCarran → PHX Sky Harbor · Grand Canyon y Sedona · CONFIRMADA", paid:false, status:"reservado" },
-    { id:"car2", company:"Alamo", city:"Orlando → Miami",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Miami · CONFIRMADA", paid:false, status:"reservado" },
+    { id:"car1", company:"Alamo", city:"Las Vegas → Phoenix", pickUp:"2026-06-17", dropOff:"2026-06-21", confirmation:"#898251065COUNT", cost:0, notes:"Nissan Rogue · LAS McCarran → PHX Sky Harbor · Grand Canyon y Sedona · CONFIRMADA", paid:false, status:"confirmado" },
+    { id:"car2", company:"Alamo", city:"Orlando → Miami",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Miami · CONFIRMADA", paid:false, status:"confirmado" },
   ],
   tickets: [],
   expenses: [],
@@ -544,11 +544,6 @@ function DashboardSection({ data, updateData }) {
   const topCategory = Object.entries(byCategory).sort((a, b) => b[1] - a[1])[0];
   const daysUntil = Math.max(0, Math.ceil((new Date("2026-06-11") - getUSNow()) / (1000 * 60 * 60 * 24)));
   const confirmedFlights = (data.flights || []).filter((f) => f.status === "confirmado").length;
-  const pendingItems = [
-    ...(data.hotels || []).filter(h => !h.confirmation).map(h => `Aloj. ${h.city || h.name || "?"}`),
-    ...(data.cars || []).filter(c => !c.confirmation).map(c => `Auto ${c.city || c.company || "?"}`),
-    ...(data.flights || []).filter(f => !f.confirmation).map(f => `Vuelo ${f.from}→${f.to}`),
-  ];
 
   return (
     <div>
@@ -572,17 +567,33 @@ function DashboardSection({ data, updateData }) {
         </Card>
       </div>
 
-      {pendingItems.length > 0 && (
-        <Card style={{ borderColor: "rgba(255,230,109,0.15)", marginBottom: 12 }}>
-          <div style={{ fontSize: 12, color: "#FFE66D", fontWeight: 700, marginBottom: 10, textTransform: "uppercase", letterSpacing: 1 }}>⚠️ Pendientes</div>
-          {pendingItems.map((item, i) => (
-            <div key={i} style={{ fontSize: 13, color: "#C8CDD8", padding: "4px 0", display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 6, height: 6, borderRadius: 3, background: "#FFE66D", flexShrink: 0 }} />
-              Falta confirmación: {item}
+      {/* Urgentes desde la tab de Pendientes */}
+      {(() => {
+        const urgentes = (data.pending || []).filter(i => i.urgency === "alta" && !i.done);
+        if (urgentes.length === 0) return null;
+        return (
+          <Card style={{ borderColor: "rgba(255,107,107,0.2)", background: "rgba(255,107,107,0.04)", marginBottom: 12 }}>
+            <div style={{ fontSize: 11, color: "#FF6B6B", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>
+              🔴 Urgentes · {urgentes.length}
             </div>
-          ))}
-        </Card>
-      )}
+            {urgentes.map((item) => (
+              <div key={item.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "6px 0", borderBottom: "1px solid rgba(255,107,107,0.08)" }}>
+                <span style={{ fontSize: 16, flexShrink: 0 }}>{item.emoji || "📌"}</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: "#E8ECF4", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.text}</div>
+                  {item.detail && <div style={{ fontSize: 11, color: "#8892A4", marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.detail}</div>}
+                </div>
+                {item.url && (
+                  <a href={item.url} target="_blank" rel="noopener noreferrer"
+                    style={{ flexShrink: 0, padding: "3px 8px", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 6, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none" }}>
+                    →
+                  </a>
+                )}
+              </div>
+            ))}
+          </Card>
+        );
+      })()}
 
       {/* Matches countdown cards */}
       {(() => {
