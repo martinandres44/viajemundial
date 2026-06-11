@@ -1735,53 +1735,21 @@ function ChecklistSection({ data, updateData }) {
   );
 }
 
-function PendingSection({ data, update }) {
-  const items = (data.pending || []);
-  const [adding, setAdding] = useState(false);
-  const [editId, setEditId] = useState(null);
-  const [form, setForm] = useState({ text: "", detail: "", urgency: "alta", url: "", emoji: "📌" });
+// ── Pending form constants (top-level so React doesn't remount on every render) ──
+const PENDING_EMOJIS   = ["📌","✈️","🏨","🚗","🚁","🎪","🎫","🌉","🍹","🏔️","✅","💊","🎭","🛍️","📋"];
+const PENDING_URGENCIAS = [
+  { id: "alta",  label: "🔴 Urgente",      color: "#FF6B6B", bg: "rgba(255,107,107,0.06)", border: "rgba(255,107,107,0.2)"  },
+  { id: "media", label: "🟡 Media",        color: "#FFE66D", bg: "rgba(255,230,109,0.04)", border: "rgba(255,230,109,0.15)" },
+  { id: "baja",  label: "🟢 Cuando pueda", color: "#00D4AA", bg: "rgba(0,212,170,0.04)",   border: "rgba(0,212,170,0.15)"  },
+];
+const PENDING_EMPTY = { text: "", detail: "", urgency: "alta", url: "", emoji: "📌" };
 
-  const EMOJIS = ["📌","✈️","🏨","🚗","🚁","🎪","🎫","🌉","🍹","🏔️","✅","💊","🎭","🛍️","📋"];
-  const URGENCIAS = [
-    { id: "alta",  label: "🔴 Urgente",       color: "#FF6B6B", bg: "rgba(255,107,107,0.06)", border: "rgba(255,107,107,0.2)" },
-    { id: "media", label: "🟡 Media",         color: "#FFE66D", bg: "rgba(255,230,109,0.04)", border: "rgba(255,230,109,0.15)" },
-    { id: "baja",  label: "🟢 Cuando pueda",  color: "#00D4AA", bg: "rgba(0,212,170,0.04)",   border: "rgba(0,212,170,0.15)" },
-  ];
-
-  const add = () => {
-    if (!form.text.trim()) return;
-    const newItem = { id: Date.now()+"", ...form };
-    update({ ...data, pending: [...items, newItem] });
-    setForm({ text: "", detail: "", urgency: "alta", url: "", emoji: "📌" });
-    setAdding(false);
-  };
-
-  const remove = (id) => update({ ...data, pending: items.filter(i => i.id !== id) });
-
-  const saveEdit = (id) => {
-    update({ ...data, pending: items.map(i => i.id === id ? { ...i, ...form } : i) });
-    setEditId(null);
-  };
-
-  const startEdit = (item) => {
-    setForm({ text: item.text, detail: item.detail || "", urgency: item.urgency || "alta", url: item.url || "", emoji: item.emoji || "📌" });
-    setEditId(item.id);
-  };
-
-  const toggleDone = (id) => {
-    update({ ...data, pending: items.map(i => i.id === id ? { ...i, done: !i.done } : i) });
-  };
-
-  const alta  = items.filter(i => i.urgency === "alta"  && !i.done);
-  const media = items.filter(i => i.urgency === "media" && !i.done);
-  const baja  = items.filter(i => i.urgency === "baja"  && !i.done);
-  const done  = items.filter(i => i.done);
-
-  const FormInline = ({ onSave, onCancel }) => (
+// Standalone form — defined OUTSIDE PendingSection so React never remounts it
+function PendingForm({ form, setForm, onSave, onCancel }) {
+  return (
     <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 14, padding: 14, marginBottom: 10 }}>
-      {/* Emoji picker */}
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
-        {EMOJIS.map(e => (
+        {PENDING_EMOJIS.map(e => (
           <button key={e} onClick={() => setForm(f => ({ ...f, emoji: e }))}
             style={{ background: form.emoji === e ? "rgba(0,212,170,0.2)" : "transparent", border: form.emoji === e ? "1px solid rgba(0,212,170,0.4)" : "1px solid rgba(255,255,255,0.06)", borderRadius: 6, padding: "4px 7px", fontSize: 16, cursor: "pointer" }}>
             {e}
@@ -1794,9 +1762,8 @@ function PendingSection({ data, update }) {
         style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "7px 10px", fontSize: 13, color: "#C8CDD8", fontFamily: "inherit", marginBottom: 8, boxSizing: "border-box" }} />
       <input value={form.url} onChange={e => setForm(f => ({ ...f, url: e.target.value }))} placeholder="Link (opcional)"
         style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "7px 10px", fontSize: 13, color: "#C8CDD8", fontFamily: "inherit", marginBottom: 10, boxSizing: "border-box" }} />
-      {/* Urgency */}
       <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
-        {URGENCIAS.map(u => (
+        {PENDING_URGENCIAS.map(u => (
           <button key={u.id} onClick={() => setForm(f => ({ ...f, urgency: u.id }))}
             style={{ flex: 1, background: form.urgency === u.id ? u.bg : "transparent", border: `1px solid ${form.urgency === u.id ? u.color + "60" : "rgba(255,255,255,0.08)"}`, borderRadius: 8, padding: "6px 4px", fontSize: 11, color: form.urgency === u.id ? u.color : "#8892A4", fontWeight: 700, cursor: "pointer" }}>
             {u.label}
@@ -1804,21 +1771,42 @@ function PendingSection({ data, update }) {
         ))}
       </div>
       <div style={{ display: "flex", gap: 8 }}>
-        <button onClick={onSave} style={{ flex: 1, background: "rgba(0,212,170,0.15)", border: "1px solid rgba(0,212,170,0.3)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#00D4AA", fontWeight: 700, cursor: "pointer" }}>
-          Guardar
-        </button>
-        <button onClick={onCancel} style={{ flex: 1, background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#8892A4", cursor: "pointer" }}>
-          Cancelar
-        </button>
+        <button onClick={onSave} style={{ flex: 1, background: "rgba(0,212,170,0.15)", border: "1px solid rgba(0,212,170,0.3)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#00D4AA", fontWeight: 700, cursor: "pointer" }}>Guardar</button>
+        <button onClick={onCancel} style={{ flex: 1, background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#8892A4", cursor: "pointer" }}>Cancelar</button>
       </div>
     </div>
   );
+}
+
+function PendingSection({ data, update }) {
+  const items = (data.pending || []);
+  const [adding, setAdding]   = useState(false);
+  const [editId, setEditId]   = useState(null);
+  const [form,   setForm]     = useState(PENDING_EMPTY);
+
+  const add = () => {
+    if (!form.text.trim()) return;
+    update({ ...data, pending: [...items, { id: Date.now()+"", ...form }] });
+    setForm(PENDING_EMPTY);
+    setAdding(false);
+  };
+
+  const remove     = (id) => update({ ...data, pending: items.filter(i => i.id !== id) });
+  const toggleDone = (id) => update({ ...data, pending: items.map(i => i.id === id ? { ...i, done: !i.done } : i) });
+  const saveEdit   = (id) => { update({ ...data, pending: items.map(i => i.id === id ? { ...i, ...form } : i) }); setEditId(null); };
+  const startEdit  = (item) => { setForm({ text: item.text, detail: item.detail||"", urgency: item.urgency||"alta", url: item.url||"", emoji: item.emoji||"📌" }); setEditId(item.id); setAdding(false); };
+
+  const alta  = items.filter(i => i.urgency === "alta"  && !i.done);
+  const media = items.filter(i => i.urgency === "media" && !i.done);
+  const baja  = items.filter(i => i.urgency === "baja"  && !i.done);
+  const done  = items.filter(i => i.done);
 
   const ItemRow = ({ item }) => {
-    const urg = URGENCIAS.find(u => u.id === item.urgency) || URGENCIAS[0];
-    return editId === item.id ? (
-      <FormInline onSave={() => saveEdit(item.id)} onCancel={() => setEditId(null)} />
-    ) : (
+    const urg = PENDING_URGENCIAS.find(u => u.id === item.urgency) || PENDING_URGENCIAS[0];
+    if (editId === item.id) {
+      return <PendingForm form={form} setForm={setForm} onSave={() => saveEdit(item.id)} onCancel={() => setEditId(null)} />;
+    }
+    return (
       <div style={{ marginBottom: 8, borderRadius: 14, background: item.done ? "rgba(255,255,255,0.02)" : urg.bg, border: `1px solid ${item.done ? "rgba(255,255,255,0.06)" : urg.border}`, padding: "11px 13px", opacity: item.done ? 0.5 : 1 }}>
         <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
           <button onClick={() => toggleDone(item.id)} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", lineHeight: 1, paddingTop: 1, flexShrink: 0 }}>
@@ -1831,12 +1819,10 @@ function PendingSection({ data, update }) {
           <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
             {item.url && (
               <a href={item.url} target="_blank" rel="noopener noreferrer"
-                style={{ padding: "4px 8px", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 6, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none" }}>
-                →
-              </a>
+                style={{ padding: "4px 8px", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 6, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none" }}>→</a>
             )}
             <button onClick={() => startEdit(item)} style={{ background: "none", border: "none", color: "#8892A4", cursor: "pointer", fontSize: 15, padding: "4px 5px" }}>✏️</button>
-            <button onClick={() => remove(item.id)} style={{ background: "none", border: "none", color: "#8892A4", cursor: "pointer", fontSize: 15, padding: "4px 5px" }}>🗑</button>
+            <button onClick={() => remove(item.id)}  style={{ background: "none", border: "none", color: "#8892A4", cursor: "pointer", fontSize: 15, padding: "4px 5px" }}>🗑</button>
           </div>
         </div>
       </div>
@@ -1856,7 +1842,7 @@ function PendingSection({ data, update }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
         <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", fontFamily: "'Playfair Display', serif" }}>📌 Pendientes</div>
-        <button onClick={() => { setAdding(!adding); setEditId(null); }}
+        <button onClick={() => { setAdding(a => !a); setEditId(null); }}
           style={{ padding: "7px 14px", background: adding ? "transparent" : "rgba(0,212,170,0.12)", border: `1px solid ${adding ? "rgba(255,255,255,0.1)" : "rgba(0,212,170,0.25)"}`, borderRadius: 20, fontSize: 12, color: adding ? "#8892A4" : "#00D4AA", fontWeight: 700, cursor: "pointer" }}>
           {adding ? "✕ Cancelar" : "+ Agregar"}
         </button>
@@ -1865,7 +1851,7 @@ function PendingSection({ data, update }) {
         {pending_count} pendientes{done.length > 0 ? ` · ${done.length} completados` : ""}
       </div>
 
-      {adding && <FormInline onSave={add} onCancel={() => setAdding(false)} />}
+      {adding && <PendingForm form={form} setForm={setForm} onSave={add} onCancel={() => setAdding(false)} />}
 
       {items.length === 0 && !adding && (
         <div style={{ textAlign: "center", padding: "40px 20px", color: "#8892A4" }}>
@@ -1874,10 +1860,10 @@ function PendingSection({ data, update }) {
         </div>
       )}
 
-      <Section label="🔴 Urgentes"       color="#FF6B6B" list={alta} />
+      <Section label="🔴 Urgentes"        color="#FF6B6B" list={alta}  />
       <Section label="🟡 Media prioridad" color="#FFE66D" list={media} />
-      <Section label="🟢 Cuando pueda"   color="#00D4AA" list={baja} />
-      {done.length > 0 && <Section label="✅ Completados"  color="#8892A4" list={done} />}
+      <Section label="🟢 Cuando pueda"    color="#00D4AA" list={baja}  />
+      {done.length > 0 && <Section label="✅ Completados" color="#8892A4" list={done} />}
     </div>
   );
 }
