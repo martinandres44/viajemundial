@@ -7,9 +7,23 @@ import { onTripData, saveTripData } from "./firebase-mundial";
 const SHEETS_URL = "TU_APPS_SCRIPT_URL";
 
 // Weather - changes based on current city (default: NYC as central point)
-const WEATHER_LAT = 40.7128;
-const WEATHER_LON = -74.0060;
-const WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode,wind_speed_10m_max,uv_index_max&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weathercode&timezone=America/New_York&forecast_days=10`;
+// City coordinates for dynamic weather
+const CITY_COORDS = {
+  bsas:    { lat: -34.6037, lon: -58.3816, tz: "America/Argentina/Buenos_Aires", name: "Buenos Aires"  },
+  nyc:     { lat:  40.7128, lon: -74.0060, tz: "America/New_York",               name: "Nueva York"    },
+  kc:      { lat:  39.0997, lon: -94.5786, tz: "America/Chicago",                name: "Kansas City"   },
+  vegas:   { lat:  36.1699, lon: -115.1398,tz: "America/Los_Angeles",            name: "Las Vegas"     },
+  canyon:  { lat:  36.0544, lon: -112.1401,tz: "America/Phoenix",                name: "Grand Canyon"  },
+  sedona:  { lat:  34.8697, lon: -111.7609,tz: "America/Phoenix",                name: "Sedona"        },
+  dallas:  { lat:  32.7767, lon: -96.7970, tz: "America/Chicago",                name: "Dallas"        },
+  orlando: { lat:  28.5383, lon: -81.3792, tz: "America/New_York",               name: "Orlando"       },
+  miami:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Miami"         },
+};
+
+const buildWeatherUrl = (cityId) => {
+  const c = CITY_COORDS[cityId] || CITY_COORDS.nyc;
+  return `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode,wind_speed_10m_max,uv_index_max&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weathercode&timezone=${encodeURIComponent(c.tz)}&forecast_days=10`;
+};
 
 const WMO_CODES = {
   0: { label: "Despejado", icon: "☀️" },
@@ -401,48 +415,91 @@ const Tab = ({ active, onClick, icon, label, badge }) => (
 
 // ========== WEATHER ==========
 
-function WeatherWidget() {
+function WeatherWidget({ itinerary }) {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [useFahrenheit, setUseFahrenheit] = useState(false);
+  const [useFahrenheit, setUseFahrenheit] = useState(false); // default °C
+  const [currentCity, setCurrentCity] = useState(null);
+
+  // Detect which city we're in today based on itinerary
+  useEffect(() => {
+    const today = getUSToday();
+    // Find the itinerary day that matches or is the last day before today
+    const days = (itinerary || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+    let city = null;
+    for (const day of days) {
+      if (day.date <= today) city = day.city;
+      else break;
+    }
+    // If trip hasn't started yet, show Buenos Aires; if it's over, show Miami
+    if (!city) {
+      const firstDay = days[0]?.date;
+      city = firstDay && today < firstDay ? "bsas" : "miami";
+    }
+    setCurrentCity(city);
+  }, [itinerary]);
 
   useEffect(() => {
-    fetch(WEATHER_URL)
+    if (!currentCity) return;
+    setLoading(true);
+    setWeather(null);
+    fetch(buildWeatherUrl(currentCity))
       .then(r => r.json())
-      .then(data => { setWeather(data); setLoading(false); })
+      .then(d => { setWeather(d); setLoading(false); })
       .catch(() => setLoading(false));
-  }, []);
+  }, [currentCity]);
 
+  const cityInfo = CITY_COORDS[currentCity] || CITY_COORDS.nyc;
   const dayNames = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  const tempDisplay = (c) => useFahrenheit ? `${celsiusToF(c)}°F` : `${Math.round(c)}°C`;
+
+  // City selector
+  const CityPicker = () => (
+    <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 4, scrollbarWidth: "none", marginBottom: 10 }}>
+      {Object.entries(CITY_COORDS).map(([id, c]) => (
+        <button key={id} onClick={() => setCurrentCity(id)}
+          style={{ flexShrink: 0, padding: "4px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: "pointer", border: `1px solid ${currentCity === id ? "rgba(0,212,170,0.5)" : "rgba(255,255,255,0.08)"}`, background: currentCity === id ? "rgba(0,212,170,0.12)" : "transparent", color: currentCity === id ? "#00D4AA" : "#8892A4", transition: "all .15s" }}>
+          {CITIES[id]?.emoji || "📍"} {c.name.split(" ")[0]}
+        </button>
+      ))}
+    </div>
+  );
 
   if (loading) return (
     <Card style={{ marginBottom: 16 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", padding: 20 }}>
-        <div style={{ width: 20, height: 20, border: "2px solid rgba(0,212,170,0.3)", borderTopColor: "#00D4AA", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-        <span style={{ fontSize: 13, color: "#8892A4" }}>Cargando clima...</span>
+      <CityPicker />
+      <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", padding: 16 }}>
+        <div style={{ width: 18, height: 18, border: "2px solid rgba(0,212,170,0.3)", borderTopColor: "#00D4AA", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        <span style={{ fontSize: 13, color: "#8892A4" }}>Cargando {cityInfo.name}...</span>
       </div>
     </Card>
   );
 
   if (!weather?.current) return (
     <Card style={{ marginBottom: 16 }}>
+      <CityPicker />
       <div style={{ textAlign: "center", padding: 12 }}>
         <span style={{ fontSize: 24 }}>🌐</span>
-        <div style={{ fontSize: 13, color: "#8892A4", marginTop: 6 }}>Weather no disponible</div>
+        <div style={{ fontSize: 13, color: "#8892A4", marginTop: 6 }}>Clima no disponible</div>
       </div>
     </Card>
   );
 
   const { current, daily } = weather;
   const currentInfo = getWeatherInfo(current.weathercode);
-  const tempDisplay = (c) => useFahrenheit ? `${celsiusToF(c)}°F` : `${Math.round(c)}°C`;
 
   return (
     <div style={{ marginBottom: 16 }}>
       <Card style={{ marginBottom: 10, background: "linear-gradient(135deg, rgba(0,180,216,0.12) 0%, rgba(0,212,170,0.06) 100%)", borderColor: "rgba(0,180,216,0.15)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
-          <div style={{ fontSize: 11, color: "#00B4D8", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2 }}>🏟️ Nueva York ahora</div>
-          <button onClick={() => setUseFahrenheit(!useFahrenheit)} style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 6, padding: "3px 8px", color: "#8892A4", fontSize: 11, cursor: "pointer", fontWeight: 600 }}>°{useFahrenheit ? "C" : "F"}</button>
+        <CityPicker />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+          <div style={{ fontSize: 11, color: "#00B4D8", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2 }}>
+            {CITIES[currentCity]?.emoji} {cityInfo.name} — ahora
+          </div>
+          <button onClick={() => setUseFahrenheit(!useFahrenheit)}
+            style={{ background: "rgba(255,255,255,0.08)", border: "none", borderRadius: 6, padding: "3px 8px", color: "#8892A4", fontSize: 11, cursor: "pointer", fontWeight: 600 }}>
+            °{useFahrenheit ? "C" : "F"}
+          </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 48, lineHeight: 1 }}>{currentInfo.icon}</div>
@@ -501,7 +558,7 @@ function DashboardSection({ data, updateData }) {
         <div style={{ fontSize: 14, color: "#8892A4", marginTop: 4 }}>días para el viaje</div>
       </div>
 
-      <WeatherWidget />
+      <WeatherWidget itinerary={data.itinerary} />
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
         <Card>
