@@ -93,21 +93,21 @@ const DEFAULT_DATA = {
     { id:"f4", type:"interno",  airline:"Delta",              flightNumber:"",    from:"NYC", to:"MCI", date:"2026-06-16", time:"07:30", status:"reservado", notes:"Llegada 09:48 · $310/pax · 5 carry on · $335 total · Asientos NO asignados aún", confirmation:"" },
     { id:"f5", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"MCI", to:"LAS", date:"2026-06-17", time:"08:45", status:"reservado", notes:"Llegada 09:45 · $455/pax · 5 carry on · $2,041.64 total · Asientos 20ABCDEF", confirmation:"" },
     { id:"f6", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"PHX", to:"DAL", date:"2026-06-21", time:"18:55", status:"reservado", notes:"Llegada 23:20 · $238/pax · $1,008 total · Asientos NO asignados aún", confirmation:"" },
-    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"pendiente",  notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total · Asientos 22E22F", confirmation:"" },
+    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"reservado",  notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total · Asientos 22E22F", confirmation:"" },
     // ─── VUELTA ───
     { id:"f8", type:"vuelta",   airline:"LATAM",              flightNumber:"",    from:"MIA", to:"LIM", date:"2026-06-28", time:"15:35", status:"reservado", notes:"Llegada 20:30 · $497/pax · Asientos 20D21E", confirmation:"" },
     { id:"f9", type:"vuelta",   airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"AEP", date:"2026-06-29", time:"02:00", status:"reservado", notes:"Llegada 08:30 · $766/pax · 2 valijas + 5 carry on · Asientos 18DEF", confirmation:"" },
     // ─── VUELTA ALTERNATIVA DALLAS ───
-    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"pendiente",  notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total · Asientos 21B — Falta Tomy", confirmation:"" },
+    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"reservado",  notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total · Asientos 21B — Falta Tomy", confirmation:"" },
   ],
   hotels: [
-    { id:"h1", name:"DoubleTree Hilton",       city:"Nueva York",    checkIn:"2026-06-12", checkOut:"2026-06-16", confirmation:"", cost:2430, notes:"4 noches · Reservado", paid:false, status:"reservado" },
-    { id:"h2", name:"Ramada by Wyndham",       city:"Kansas City",   checkIn:"2026-06-16", checkOut:"2026-06-17", confirmation:"", cost:217,  notes:"1 noche post partido", paid:false, status:"reservado" },
-    { id:"h3", name:"Planet Hollywood",        city:"Las Vegas",     checkIn:"2026-06-17", checkOut:"2026-06-19", confirmation:"", cost:413,  notes:"2 noches", paid:false, status:"reservado" },
-    { id:"h4", name:"Grand Canyon IHG",        city:"Grand Canyon",  checkIn:"2026-06-19", checkOut:"2026-06-21", confirmation:"", cost:474,  notes:"2 noches", paid:false, status:"reservado" },
-    { id:"h5", name:"Holiday Inn DFW Airport South", city:"Dallas",  checkIn:"2026-06-21", checkOut:"2026-06-22", confirmation:"", cost:179,  notes:"1 noche · Aeropuerto DFW", paid:false, status:"reservado" },
-    { id:"h6", name:"All Star Movies (Disney)",city:"Orlando",       checkIn:"2026-06-22", checkOut:"2026-06-25", confirmation:"", cost:471,  notes:"3 noches", paid:false, status:"reservado" },
-    { id:"h7", name:"Airbnb",                  city:"Siesta Key",    checkIn:"2026-06-25", checkOut:"2026-06-28", confirmation:"", cost:1029.65, notes:"3 noches · Siesta Key", paid:false, status:"reservado" },
+    { id:"h1", name:"DoubleTree Hilton",             city:"Nueva York",   address:"569 Lexington Ave, New York, NY 10022",                         checkIn:"2026-06-12", checkOut:"2026-06-16", confirmation:"", cost:2430,    notes:"4 noches", paid:false, status:"reservado" },
+    { id:"h2", name:"Ramada by Wyndham",             city:"Kansas City",  address:"6101 E Frontage Rd, Kansas City, MO 64120",                      checkIn:"2026-06-16", checkOut:"2026-06-17", confirmation:"", cost:217,     notes:"1 noche post partido", paid:false, status:"reservado" },
+    { id:"h3", name:"Planet Hollywood Resort",       city:"Las Vegas",    address:"3667 Las Vegas Blvd S, Las Vegas, NV 89109",                     checkIn:"2026-06-17", checkOut:"2026-06-19", confirmation:"", cost:413,     notes:"2 noches", paid:false, status:"reservado" },
+    { id:"h4", name:"Grand Canyon IHG",              city:"Grand Canyon", address:"Market Plaza, Grand Canyon Village, AZ 86023",                   checkIn:"2026-06-19", checkOut:"2026-06-21", confirmation:"", cost:474,     notes:"2 noches", paid:false, status:"reservado" },
+    { id:"h5", name:"Holiday Inn DFW Airport South", city:"Dallas",       address:"4440 W Airport Fwy, Irving, TX 75062",                           checkIn:"2026-06-21", checkOut:"2026-06-22", confirmation:"", cost:179,     notes:"1 noche · Aeropuerto DFW", paid:false, status:"reservado" },
+    { id:"h6", name:"All Star Movies (Disney)",      city:"Orlando",      address:"1991 W Buena Vista Dr, Lake Buena Vista, FL 32830",              checkIn:"2026-06-22", checkOut:"2026-06-25", confirmation:"", cost:471,     notes:"3 noches", paid:false, status:"reservado" },
+    { id:"h7", name:"Airbnb",                        city:"Siesta Key",   address:"Siesta Key, FL 34242",                                           checkIn:"2026-06-25", checkOut:"2026-06-28", confirmation:"", cost:1029.65, notes:"3 noches · Siesta Key", paid:false, status:"reservado" },
   ],
   cars: [
     { id:"car1", company:"Alamo", city:"Las Vegas → Phoenix", pickUp:"2026-06-17", dropOff:"2026-06-21", confirmation:"#898251065COUNT", cost:0, notes:"Nissan Rogue · LAS McCarran → PHX Sky Harbor · Grand Canyon y Sedona · CONFIRMADA", paid:false, status:"reservado" },
@@ -709,7 +709,33 @@ function HotelSection({ data, updateData }) {
               </div>
               <div style={{ fontSize: 11, color: "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>📍 {viewHotel.city}</div>
               <div style={{ fontSize: 20, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>{viewHotel.name || "Sin nombre"}</div>
-              {viewHotel.address && <div style={{ marginBottom: 12 }}><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Dirección</div><div style={{ fontSize: 14, color: "#C8CDD8" }}>{viewHotel.address}</div></div>}
+              {viewHotel.address && (
+                <div style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Dirección</div>
+                  <div style={{ fontSize: 14, color: "#C8CDD8", marginBottom: 8 }}>{viewHotel.address}</div>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(viewHotel.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "block", textDecoration: "none" }}
+                  >
+                    <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid rgba(0,212,170,0.2)", background: "rgba(0,212,170,0.03)" }}>
+                      <iframe
+                        title="mapa"
+                        width="100%"
+                        height="160"
+                        style={{ border: "none", display: "block", pointerEvents: "none" }}
+                        loading="lazy"
+                        src={`https://maps.google.com/maps?q=${encodeURIComponent(viewHotel.address)}&output=embed&z=15`}
+                      />
+                      <div style={{ padding: "8px 12px", display: "flex", alignItems: "center", gap: 6, background: "rgba(0,212,170,0.06)" }}>
+                        <span style={{ fontSize: 14 }}>📍</span>
+                        <span style={{ fontSize: 12, color: "#00D4AA", fontWeight: 600 }}>Abrir en Google Maps →</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              )}
               <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
                 <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Check-in</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewHotel.checkIn}</div></div>
                 <div><div style={{ fontSize: 11, color: "#8892A4", fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>Check-out</div><div style={{ fontSize: 14, color: "#E8ECF4", fontWeight: 600 }}>{viewHotel.checkOut}</div></div>
@@ -1641,72 +1667,154 @@ function ChecklistSection({ data, updateData }) {
   );
 }
 
-function PendingSection() {
-  const PENDING_ITEMS = [
-    { cat: "✈️ Vuelo", item: "Dallas → Orlando", detail: "SW 22/6, 6:50pm → 10:15pm · $203/pax", url: "https://www.southwest.com", urgency: "alta" },
-    { cat: "🏨 Hotel", item: "Las Vegas (17–19/6)", detail: "MGM Grand $562 / Sheraton $328-457 / Hilton Polo Towers $466", url: null, urgency: "alta" },
-    { cat: "🏨 Hotel", item: "Orlando (22–27/6)", detail: "Vistana $580 reembolsable", url: null, urgency: "alta" },
+function PendingSection({ data, update }) {
+  const items = (data.pending || []);
+  const [adding, setAdding] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [form, setForm] = useState({ text: "", detail: "", urgency: "alta", url: "", emoji: "📌" });
 
-    { cat: "🚁 Actividad", item: "Helicóptero Papillon Grand Canyon", detail: "~$200-250/pax · 20/6 · papillon.com", url: "https://www.papillon.com", urgency: "alta" },
-    { cat: "🎪 Actividad", item: "Cirque du Soleil 'O' Las Vegas", detail: "~$100+/pax · 18/6 · en el Bellagio", url: "https://www.cirquedusoleil.com/o", urgency: "media" },
-    { cat: "🌉 Actividad", item: "Grand Canyon West Skywalk", detail: "Paquete ~$50 + Skywalk ~$60 · grandcanyonwest.com", url: "https://grandcanyonwest.com", urgency: "alta" },
-    { cat: "🌆 Actividad", item: "One World Observatory NYC", detail: "~$45/pax · 12/6 · oneworldobservatory.com", url: "https://www.oneworldobservatory.com", urgency: "media" },
-    { cat: "🍹 Actividad", item: "Westlight Rooftop Brooklyn", detail: "Reservar mesa · 13/6", url: "https://www.westlightnyc.com", urgency: "media" },
-    { cat: "🏔️ Actividad", item: "Cathedral Rock Trail (Sedona)", detail: "Red Rock Pass $5 · recreation.gov · 21/6", url: "https://www.recreation.gov", urgency: "media" },
-
-    { cat: "✅ Verificar", item: "Duplicado hoteles Dallas", detail: "Hampton Inn + Irving Las Colinas — verificar cuál es el correcto", url: null, urgency: "media" },
+  const EMOJIS = ["📌","✈️","🏨","🚗","🚁","🎪","🎫","🌉","🍹","🏔️","✅","💊","🎭","🛍️","📋"];
+  const URGENCIAS = [
+    { id: "alta",  label: "🔴 Urgente",       color: "#FF6B6B", bg: "rgba(255,107,107,0.06)", border: "rgba(255,107,107,0.2)" },
+    { id: "media", label: "🟡 Media",         color: "#FFE66D", bg: "rgba(255,230,109,0.04)", border: "rgba(255,230,109,0.15)" },
+    { id: "baja",  label: "🟢 Cuando pueda",  color: "#00D4AA", bg: "rgba(0,212,170,0.04)",   border: "rgba(0,212,170,0.15)" },
   ];
 
-  const alta = PENDING_ITEMS.filter(i => i.urgency === "alta");
-  const media = PENDING_ITEMS.filter(i => i.urgency === "media");
+  const add = () => {
+    if (!form.text.trim()) return;
+    const newItem = { id: Date.now()+"", ...form };
+    update({ ...data, pending: [...items, newItem] });
+    setForm({ text: "", detail: "", urgency: "alta", url: "", emoji: "📌" });
+    setAdding(false);
+  };
+
+  const remove = (id) => update({ ...data, pending: items.filter(i => i.id !== id) });
+
+  const saveEdit = (id) => {
+    update({ ...data, pending: items.map(i => i.id === id ? { ...i, ...form } : i) });
+    setEditId(null);
+  };
+
+  const startEdit = (item) => {
+    setForm({ text: item.text, detail: item.detail || "", urgency: item.urgency || "alta", url: item.url || "", emoji: item.emoji || "📌" });
+    setEditId(item.id);
+  };
+
+  const toggleDone = (id) => {
+    update({ ...data, pending: items.map(i => i.id === id ? { ...i, done: !i.done } : i) });
+  };
+
+  const alta  = items.filter(i => i.urgency === "alta"  && !i.done);
+  const media = items.filter(i => i.urgency === "media" && !i.done);
+  const baja  = items.filter(i => i.urgency === "baja"  && !i.done);
+  const done  = items.filter(i => i.done);
+
+  const FormInline = ({ onSave, onCancel }) => (
+    <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 14, padding: 14, marginBottom: 10 }}>
+      {/* Emoji picker */}
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
+        {EMOJIS.map(e => (
+          <button key={e} onClick={() => setForm(f => ({ ...f, emoji: e }))}
+            style={{ background: form.emoji === e ? "rgba(0,212,170,0.2)" : "transparent", border: form.emoji === e ? "1px solid rgba(0,212,170,0.4)" : "1px solid rgba(255,255,255,0.06)", borderRadius: 6, padding: "4px 7px", fontSize: 16, cursor: "pointer" }}>
+            {e}
+          </button>
+        ))}
+      </div>
+      <textarea value={form.text} onChange={e => setForm(f => ({ ...f, text: e.target.value }))} placeholder="Tarea o pendiente..."
+        style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "8px 10px", fontSize: 14, color: "#E8ECF4", fontFamily: "inherit", resize: "none", minHeight: 52, marginBottom: 8, boxSizing: "border-box" }} />
+      <input value={form.detail} onChange={e => setForm(f => ({ ...f, detail: e.target.value }))} placeholder="Detalle o notas (opcional)"
+        style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "7px 10px", fontSize: 13, color: "#C8CDD8", fontFamily: "inherit", marginBottom: 8, boxSizing: "border-box" }} />
+      <input value={form.url} onChange={e => setForm(f => ({ ...f, url: e.target.value }))} placeholder="Link (opcional)"
+        style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "7px 10px", fontSize: 13, color: "#C8CDD8", fontFamily: "inherit", marginBottom: 10, boxSizing: "border-box" }} />
+      {/* Urgency */}
+      <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
+        {URGENCIAS.map(u => (
+          <button key={u.id} onClick={() => setForm(f => ({ ...f, urgency: u.id }))}
+            style={{ flex: 1, background: form.urgency === u.id ? u.bg : "transparent", border: `1px solid ${form.urgency === u.id ? u.color + "60" : "rgba(255,255,255,0.08)"}`, borderRadius: 8, padding: "6px 4px", fontSize: 11, color: form.urgency === u.id ? u.color : "#8892A4", fontWeight: 700, cursor: "pointer" }}>
+            {u.label}
+          </button>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={onSave} style={{ flex: 1, background: "rgba(0,212,170,0.15)", border: "1px solid rgba(0,212,170,0.3)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#00D4AA", fontWeight: 700, cursor: "pointer" }}>
+          Guardar
+        </button>
+        <button onClick={onCancel} style={{ flex: 1, background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "9px", fontSize: 13, color: "#8892A4", cursor: "pointer" }}>
+          Cancelar
+        </button>
+      </div>
+    </div>
+  );
+
+  const ItemRow = ({ item }) => {
+    const urg = URGENCIAS.find(u => u.id === item.urgency) || URGENCIAS[0];
+    return editId === item.id ? (
+      <FormInline onSave={() => saveEdit(item.id)} onCancel={() => setEditId(null)} />
+    ) : (
+      <div style={{ marginBottom: 8, borderRadius: 14, background: item.done ? "rgba(255,255,255,0.02)" : urg.bg, border: `1px solid ${item.done ? "rgba(255,255,255,0.06)" : urg.border}`, padding: "11px 13px", opacity: item.done ? 0.5 : 1 }}>
+        <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+          <button onClick={() => toggleDone(item.id)} style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", lineHeight: 1, paddingTop: 1, flexShrink: 0 }}>
+            {item.done ? "✅" : item.emoji || "📌"}
+          </button>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: item.done ? "#8892A4" : "#E8ECF4", textDecoration: item.done ? "line-through" : "none" }}>{item.text}</div>
+            {item.detail && <div style={{ fontSize: 12, color: "#8892A4", marginTop: 2, lineHeight: 1.4 }}>{item.detail}</div>}
+          </div>
+          <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+            {item.url && (
+              <a href={item.url} target="_blank" rel="noopener noreferrer"
+                style={{ padding: "4px 8px", background: "rgba(0,212,170,0.1)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 6, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none" }}>
+                →
+              </a>
+            )}
+            <button onClick={() => startEdit(item)} style={{ background: "none", border: "none", color: "#8892A4", cursor: "pointer", fontSize: 15, padding: "4px 5px" }}>✏️</button>
+            <button onClick={() => remove(item.id)} style={{ background: "none", border: "none", color: "#8892A4", cursor: "pointer", fontSize: 15, padding: "4px 5px" }}>🗑</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const Section = ({ label, color, list }) => list.length === 0 ? null : (
+    <div style={{ marginBottom: 4 }}>
+      <div style={{ fontSize: 11, color, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, margin: "16px 0 8px" }}>{label} · {list.length}</div>
+      {list.map(i => <ItemRow key={i.id} item={i} />)}
+    </div>
+  );
+
+  const pending_count = items.filter(i => !i.done).length;
 
   return (
     <div>
-      <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", marginBottom: 4, fontFamily: "'Playfair Display', serif" }}>📌 Pendientes</div>
-      <div style={{ fontSize: 12, color: "#8892A4", marginBottom: 16 }}>{PENDING_ITEMS.length} items · {alta.length} urgentes</div>
-
-      <div style={{ fontSize: 12, color: "#FF6B6B", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
-        🔴 Urgentes
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", fontFamily: "'Playfair Display', serif" }}>📌 Pendientes</div>
+        <button onClick={() => { setAdding(!adding); setEditId(null); }}
+          style={{ padding: "7px 14px", background: adding ? "transparent" : "rgba(0,212,170,0.12)", border: `1px solid ${adding ? "rgba(255,255,255,0.1)" : "rgba(0,212,170,0.25)"}`, borderRadius: 20, fontSize: 12, color: adding ? "#8892A4" : "#00D4AA", fontWeight: 700, cursor: "pointer" }}>
+          {adding ? "✕ Cancelar" : "+ Agregar"}
+        </button>
       </div>
-      {alta.map((item, i) => (
-        <div key={i} style={{ marginBottom: 8, borderRadius: 14, background: "rgba(255,107,107,0.06)", border: "1px solid rgba(255,107,107,0.15)", padding: "12px 14px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, color: "#FF6B6B", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 3 }}>{item.cat}</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4" }}>{item.item}</div>
-              <div style={{ fontSize: 12, color: "#8892A4", marginTop: 3, lineHeight: 1.4 }}>{item.detail}</div>
-            </div>
-            {item.url && (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ flexShrink: 0, padding: "6px 12px", background: "rgba(0,212,170,0.12)", border: "1px solid rgba(0,212,170,0.2)", borderRadius: 8, fontSize: 11, color: "#00D4AA", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
-                Reservar →
-              </a>
-            )}
-          </div>
-        </div>
-      ))}
-
-      <div style={{ fontSize: 12, color: "#FFE66D", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, margin: "16px 0 8px", display: "flex", alignItems: "center", gap: 6 }}>
-        🟡 Media prioridad
+      <div style={{ fontSize: 12, color: "#8892A4", marginBottom: 16 }}>
+        {pending_count} pendientes{done.length > 0 ? ` · ${done.length} completados` : ""}
       </div>
-      {media.map((item, i) => (
-        <div key={i} style={{ marginBottom: 8, borderRadius: 14, background: "rgba(255,230,109,0.04)", border: "1px solid rgba(255,230,109,0.12)", padding: "12px 14px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, color: "#FFE66D", fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 3 }}>{item.cat}</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4" }}>{item.item}</div>
-              <div style={{ fontSize: 12, color: "#8892A4", marginTop: 3, lineHeight: 1.4 }}>{item.detail}</div>
-            </div>
-            {item.url && (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ flexShrink: 0, padding: "6px 12px", background: "rgba(255,230,109,0.1)", border: "1px solid rgba(255,230,109,0.2)", borderRadius: 8, fontSize: 11, color: "#FFE66D", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
-                Reservar →
-              </a>
-            )}
-          </div>
+
+      {adding && <FormInline onSave={add} onCancel={() => setAdding(false)} />}
+
+      {items.length === 0 && !adding && (
+        <div style={{ textAlign: "center", padding: "40px 20px", color: "#8892A4" }}>
+          <div style={{ fontSize: 40, marginBottom: 12 }}>🎉</div>
+          <div style={{ fontSize: 14 }}>¡Sin pendientes! Agregá uno con el botón +</div>
         </div>
-      ))}
+      )}
+
+      <Section label="🔴 Urgentes"       color="#FF6B6B" list={alta} />
+      <Section label="🟡 Media prioridad" color="#FFE66D" list={media} />
+      <Section label="🟢 Cuando pueda"   color="#00D4AA" list={baja} />
+      {done.length > 0 && <Section label="✅ Completados"  color="#8892A4" list={done} />}
     </div>
   );
 }
+
+
 
 
 
@@ -1767,7 +1875,7 @@ export default function App() {
     tickets: <DocumentsSection data={data} updateData={updateData} />,
     itinerary: <ItinerarySection data={data} updateData={updateData} />,
     checklist: <ChecklistSection data={data} updateData={updateData} />,
-    pending: <PendingSection />,
+    pending: <PendingSection data={data} update={update} />,
   };
 
   return (
@@ -1797,7 +1905,7 @@ export default function App() {
         <Tab active={tab === "itinerary"} onClick={() => setTab("itinerary")} icon="📋" label="Plan" />
         <Tab active={tab === "tickets"} onClick={() => setTab("tickets")} icon="📁" label="Docs" badge={(data.documents || []).length || null} />
         <Tab active={tab === "checklist"} onClick={() => setTab("checklist")} icon="✅" label="Equip." badge={(data.checklist || []).filter(i => !i.checked).length || null} />
-        <Tab active={tab === "pending"} onClick={() => setTab("pending")} icon="📌" label="Pend." badge={10} />
+        <Tab active={tab === "pending"} onClick={() => setTab("pending")} icon="📌" label="Pend." badge={(data.pending || []).filter(i => !i.done).length || null} />
       </div>
     </div>
   );
