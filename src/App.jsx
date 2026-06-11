@@ -17,7 +17,7 @@ const CITY_COORDS = {
   sedona:  { lat:  34.8697, lon: -111.7609,tz: "America/Phoenix",                name: "Sedona",       emoji: "🔴" },
   dallas:  { lat:  32.7767, lon: -96.7970, tz: "America/Chicago",                name: "Dallas",       emoji: "⭐" },
   orlando: { lat:  28.5383, lon: -81.3792, tz: "America/New_York",               name: "Orlando",      emoji: "🏰" },
-  siesta:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Siesta Key",        emoji: "🏖️" },
+  miami:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Miami",        emoji: "🏖️" },
 };
 
 const buildWeatherUrl = (cityId) => {
@@ -89,7 +89,7 @@ const CITY_COLORS = {
   sedona: { bg: "#4A1A0A", accent: "#EF4444", label: "Sedona 🔴" },
   dallas: { bg: "#0D2D1A", accent: "#34D399", label: "Dallas ⭐" },
   orlando:{ bg: "#1A2D3D", accent: "#38BDF8", label: "Orlando 🏰" },
-  siesta:  { bg: "#0D2D2D", accent: "#2DD4BF", label: "Siesta Key 🏖️" },
+  miami:  { bg: "#0D2D2D", accent: "#2DD4BF", label: "Miami 🏖️" },
 };
 const getCityStyle = (city) => CITY_COLORS[city] || { bg: "rgba(255,255,255,0.04)", accent: "#00D4AA", label: "" };
 
@@ -100,19 +100,19 @@ const ColorDot = ({ color, size = 10 }) => (
 const DEFAULT_DATA = {
   flights: [
     // ─── IDA ───
-    { id:"f1", type:"ida",      airline:"LATAM",              flightNumber:"",    from:"AEP", to:"LIM", date:"2026-06-11", time:"17:35", status:"confirmado", notes:"Llegada 20:30 · $497/pax · Asientos 16CDEF (5 pax)", confirmation:"" },
-    { id:"f2", type:"ida",      airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"MIA", date:"2026-06-11", time:"23:59", status:"confirmado", notes:"Llegada 06:54 (+1) · $766/pax · 2 valijas + 5 carry on · Asientos 20DE 21DE", confirmation:"" },
+    { id:"f1", type:"ida",      airline:"LATAM",              flightNumber:"", from:"AEP", to:"LIM", date:"2026-06-11", time:"17:35", status:"confirmado", seats:"16 C·D·E·F", notes:"Llegada 20:30 · $497/pax", confirmation:"" },
+    { id:"f2", type:"ida",      airline:"American Airlines",  flightNumber:"", from:"LIM", to:"MIA", date:"2026-06-11", time:"23:59", status:"confirmado", seats:"20 D·E + 21 D·E", notes:"Llegada 06:54 (+1) · $766/pax · 2 valijas + 5 carry on", confirmation:"" },
     // ─── INTERNOS ───
-    { id:"f3", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"MIA", to:"NYC", date:"2026-06-12", time:"09:59", status:"confirmado", notes:"Llegada 13:01 · $204/pax · 5 carry on · $853 total · Asientos 12ABCD", confirmation:"" },
-    { id:"f4", type:"interno",  airline:"Delta",              flightNumber:"",    from:"NYC", to:"MCI", date:"2026-06-16", time:"07:30", status:"confirmado", notes:"Llegada 09:48 · $310/pax · 5 carry on · $335 total · Asientos NO asignados aún", confirmation:"" },
-    { id:"f5", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"MCI", to:"LAS", date:"2026-06-17", time:"08:45", status:"confirmado", notes:"Llegada 09:45 · $455/pax · 5 carry on · $2,041.64 total · Asientos 20ABCDEF", confirmation:"" },
-    { id:"f6", type:"interno",  airline:"Southwest",          flightNumber:"",    from:"PHX", to:"DAL", date:"2026-06-21", time:"18:55", status:"confirmado", notes:"Llegada 23:20 · $238/pax · $1,008 total · Asientos NO asignados aún", confirmation:"" },
-    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"confirmado",  notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total · Asientos 22E22F", confirmation:"" },
+    { id:"f3", type:"interno",  airline:"American Airlines",  flightNumber:"", from:"MIA", to:"NYC", date:"2026-06-12", time:"09:59", status:"confirmado", seats:"12 A·B·C·D", notes:"Llegada 13:01 · $204/pax · 5 carry on · $853 total", confirmation:"" },
+    { id:"f4", type:"interno",  airline:"Delta",              flightNumber:"", from:"NYC", to:"MCI", date:"2026-06-16", time:"07:30", status:"confirmado", seats:"Sin asignar", notes:"Llegada 09:48 · $310/pax · 5 carry on · $335 total", confirmation:"" },
+    { id:"f5", type:"interno",  airline:"Southwest",          flightNumber:"", from:"MCI", to:"LAS", date:"2026-06-17", time:"08:45", status:"confirmado", seats:"20 A·B·C·D·E·F", notes:"Llegada 09:45 · $455/pax · 5 carry on · $2,041.64 total", confirmation:"" },
+    { id:"f6", type:"interno",  airline:"Southwest",          flightNumber:"", from:"PHX", to:"DAL", date:"2026-06-21", time:"18:55", status:"confirmado", seats:"Sin asignar", notes:"Llegada 23:20 · $238/pax · $1,008 total", confirmation:"" },
+    { id:"f7", type:"interno",  airline:"American Airlines",  flightNumber:"", from:"DAL", to:"MCO", date:"2026-06-22", time:"18:50", status:"confirmado", seats:"22 E·F", notes:"Llegada 22:15 · $203/pax · 5 carry on · $504 total", confirmation:"" },
     // ─── VUELTA ───
-    { id:"f8", type:"vuelta",   airline:"LATAM",              flightNumber:"",    from:"MIA", to:"LIM", date:"2026-06-28", time:"15:35", status:"confirmado", notes:"Llegada 20:30 · $497/pax · Asientos 20D21E", confirmation:"" },
-    { id:"f9", type:"vuelta",   airline:"American Airlines",  flightNumber:"",    from:"LIM", to:"AEP", date:"2026-06-29", time:"02:00", status:"confirmado", notes:"Llegada 08:30 · $766/pax · 2 valijas + 5 carry on · Asientos 18DEF", confirmation:"" },
+    { id:"f8", type:"vuelta",   airline:"LATAM",              flightNumber:"", from:"MIA", to:"LIM", date:"2026-06-28", time:"15:35", status:"confirmado", seats:"20 D + 21 E", notes:"Llegada 20:30 · $497/pax", confirmation:"" },
+    { id:"f9", type:"vuelta",   airline:"American Airlines",  flightNumber:"", from:"LIM", to:"AEP", date:"2026-06-29", time:"02:00", status:"confirmado", seats:"18 D·E·F", notes:"Llegada 08:30 · $766/pax · 2 valijas + 5 carry on", confirmation:"" },
     // ─── VUELTA ALTERNATIVA DALLAS ───
-    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"",    from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"confirmado",  notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total · Asientos 21B — Falta Tomy", confirmation:"" },
+    { id:"f10", type:"vuelta",  airline:"American Airlines",  flightNumber:"", from:"DAL", to:"EZE", date:"2026-06-22", time:"18:45", status:"confirmado", seats:"21B · Falta Tomy", notes:"Llegada 07:05 (+1) · 1 valija + 2 carry on · $1,897 total", confirmation:"" },
   ],
   hotels: [
     { id:"h1", name:"DoubleTree Hilton",             city:"Nueva York",   address:"569 Lexington Ave, New York, NY 10022",                         checkIn:"2026-06-12", checkOut:"2026-06-16", confirmation:"", cost:2430,    notes:"4 noches", paid:false, status:"confirmado" },
@@ -125,14 +125,14 @@ const DEFAULT_DATA = {
   ],
   cars: [
     { id:"car1", company:"Alamo", city:"Las Vegas → Phoenix", pickUp:"2026-06-17", dropOff:"2026-06-21", confirmation:"#898251065COUNT", cost:0, notes:"Nissan Rogue · LAS McCarran → PHX Sky Harbor · Grand Canyon y Sedona · CONFIRMADA", paid:false, status:"confirmado" },
-    { id:"car2", company:"Alamo", city:"Orlando → Siesta Key",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Siesta Key · CONFIRMADA", paid:false, status:"confirmado" },
+    { id:"car2", company:"Alamo", city:"Orlando → Miami",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Miami · CONFIRMADA", paid:false, status:"confirmado" },
   ],
   tickets: [],
   expenses: [],
   itinerary: [
-    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Siesta Key ✈️", city: "bsas", activities: "17:35 - Vuelo AEP → LIM (LATAM)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Siesta Key 06:54 del 12/6" },
-    { id: "d2", date: "2026-06-12", title: "Siesta Key → Nueva York — Llegada 🗽", city: "nyc",
-  activities: "06:54 - Llegada a Siesta Key MIA · estirar piernas, café\n09:59 - Vuelo MIA→NYC American Airlines · $204/pax\n13:01 - Llegada a LGA/JFK · AirTrain + subway E al hotel (~$8.50) o taxi (~$55-70)\n14:00 - Check-in DoubleTree Hilton · dejar equipaje aunque no haya cuarto\n14:30 - Almuerzo en Hells Kitchen · 9th Ave entre 45th-55th · Sate Kampar o Danji (cocina coreana)\n15:30 - Times Square · primera impresión · toméense la foto clásica en el centro · entrar al M&Ms World o TKTS para ver precios Broadway\n16:30 - 5th Avenue · caminata desde 42nd hacia el norte · frente al Rockefeller Center · St. Patrick Cathedral · entrada libre\n17:00 - Grand Central Terminal · Main Concourse · techo con constelaciones · Whispering Gallery en la esquina noreste del nivel inferior · acústica increíble · gratis\n18:30 - One World Observatory · reservar ANTES del viaje · ~$45/pax · mejor al atardecer · piso 100 · vistas 360° de Manhattan\n20:30 - Cena en Lower Manhattan · Stone Street (la calle de adoquines más antigua de NYC) · ambiente de pub · buena cerveza\n22:00 - Paseo nocturno por el puente de Brooklyn desde Manhattan si tienen energía",
+    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Miami ✈️", city: "bsas", activities: "17:35 - Vuelo AEP → LIM (LATAM)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Miami 06:54 del 12/6" },
+    { id: "d2", date: "2026-06-12", title: "Miami → Nueva York — Llegada 🗽", city: "nyc",
+  activities: "06:54 - Llegada a Miami MIA · estirar piernas, café\n09:59 - Vuelo MIA→NYC American Airlines · $204/pax\n13:01 - Llegada a LGA/JFK · AirTrain + subway E al hotel (~$8.50) o taxi (~$55-70)\n14:00 - Check-in DoubleTree Hilton · dejar equipaje aunque no haya cuarto\n14:30 - Almuerzo en Hells Kitchen · 9th Ave entre 45th-55th · Sate Kampar o Danji (cocina coreana)\n15:30 - Times Square · primera impresión · toméense la foto clásica en el centro · entrar al M&Ms World o TKTS para ver precios Broadway\n16:30 - 5th Avenue · caminata desde 42nd hacia el norte · frente al Rockefeller Center · St. Patrick Cathedral · entrada libre\n17:00 - Grand Central Terminal · Main Concourse · techo con constelaciones · Whispering Gallery en la esquina noreste del nivel inferior · acústica increíble · gratis\n18:30 - One World Observatory · reservar ANTES del viaje · ~$45/pax · mejor al atardecer · piso 100 · vistas 360° de Manhattan\n20:30 - Cena en Lower Manhattan · Stone Street (la calle de adoquines más antigua de NYC) · ambiente de pub · buena cerveza\n22:00 - Paseo nocturno por el puente de Brooklyn desde Manhattan si tienen energía",
   notes: "💡 AirTrain desde JFK + subway E/A al centro cuesta $8.50 vs taxi $60+. Reservar One World Observatory ANTES del viaje en oneworldobservatory.com." },
     { id: "d3", date: "2026-06-13", title: "NYC — The Met + Central Park + Brooklyn 🗽", city: "nyc",
   activities: "08:00 - Desayuno americano en diner local · Lexington Candy Shop (Upper East Side) o E.A.T. · huevos, bagel, jugo\n09:30 - The Metropolitan Museum of Art · llegar antes de las 10am · entrada ~$30/pax · impresionismo europeo (sala 800-830) · sala egipcia con el Templo de Dendur · arte medieval · armaduras del siglo XVI · mínimo 2.5hs · azotea abierta en verano con vistas al parque\n12:00 - Almuerzo en el Café del Met o en el parque con algo de la entrada\n13:00 - Central Park desde la 5th Ave ·  Conservatory Garden → Jackie Kennedy Onassis Reservoir (4km de lago) → Bow Bridge (foto icónica · la más fotografiada del parque) → Bethesda Fountain y Terrace → Strawberry Fields (tributo a John Lennon · mosaico Imagine) → Tavern on the Green exterior\n15:30 - Salida del parque hacia el sur · Madison Avenue o Lexington · vidriera de tiendas\n16:30 - Subway a Brooklyn · línea 2/3 a Clark St o A/C a High St\n17:00 - DUMBO (Down Under the Manhattan Bridge Overpass) · foto obligatoria desde Washington St con el puente de Brooklyn y el skyline · Jane's Carousel (carrusel histórico frente al East River · $2)\n17:45 - Brooklyn Bridge caminando · desde el lado de Brooklyn hacia Manhattan · 30-40 min cruzando · mejor con luz del atardecer\n19:30 - Cena en DUMBO o Brooklyn Heights · Juliana's Pizza (rival histórica de Grimaldi's · debajo del puente) o Time Out Market Brooklyn\n21:00 - Westlight Rooftop Bar · William Vale Hotel piso 22 en Williamsburg · vistas increíbles de Manhattan · reservar mesa con anticipación",
@@ -152,9 +152,9 @@ const DEFAULT_DATA = {
     { id: "d12", date: "2026-06-22", title: "Dallas ⚽ PARTIDO 2 🇦🇷", city: "dallas", activities: "09:30 - Salir del Holiday Inn DFW en Uber/Lyft\n⚠️ Ruta: Holiday Inn DFW → I-30 W → TX-360 S → AT&T Way · ~30km · 40-60min\n12:00 - ⚽ ARGENTINA 🇦🇷 vs AUSTRIA 🇦🇹 · AT&T Stadium Arlington\n17:30 - Uber al aeropuerto DFW\n18:50 - Vuelo DFW → Orlando (Southwest)", notes: "⚠️ Vuelo 18:50 — tiempo justo post partido. Tener Uber pedido ANTES de salir del estadio." },
     { id: "d13", date: "2026-06-23", title: "Orlando 🏰", city: "orlando", activities: "Descanso post partido y viaje\nDisney Springs · International Drive · Universal CityWalk", notes: "Día de recuperación. Definir parques." },
     { id: "d14", date: "2026-06-24", title: "Orlando — Parques 🏰", city: "orlando", activities: "Parques temáticos · Universal / Disney / SeaWorld\nReservar tickets online con anticipación", notes: "El parque que elijan el día anterior." },
-    { id: "d15", date: "2026-06-25", title: "Siesta Key 🏖️", city: "siesta", activities: "Devolver auto Orlando\nViaje a Siesta Key Beach o Siesta Key\nCheck-in · playa y relax", notes: "⏳ Destino final aún por definir." },
-    { id: "d16", date: "2026-06-26", title: "Siesta Key 🏖️",city: "siesta","Playa — Relax total 🏖️", activities: "Playa y relax\nRestaurantes · atardecer", notes: "Días de descanso merecidos." },
-    { id: "d17", date: "2026-06-27", title: "Siesta Key 🏖️",city: "siesta","Último día de playa 🏖️", activities: "Último día de relax\nCena de despedida del viaje", notes: "Penúltimo día." },
+    { id: "d15", date: "2026-06-25", title: "Miami o Siesta Key 🏖️", city: "miami", activities: "Devolver auto Orlando\nViaje a Miami Beach o Siesta Key\nCheck-in · playa y relax", notes: "⏳ Destino final aún por definir." },
+    { id: "d16", date: "2026-06-26", title: "Playa — Relax total 🏖️", city: "miami", activities: "Playa y relax\nRestaurantes · atardecer", notes: "Días de descanso merecidos." },
+    { id: "d17", date: "2026-06-27", title: "Último día de playa 🏖️", city: "miami", activities: "Último día de relax\nCena de despedida del viaje", notes: "Penúltimo día." },
     { id: "d18", date: "2026-06-28", title: "Vuelta a Buenos Aires ✈️🇦🇷", city: "bsas", activities: "15:35 - Vuelo MIA → LIM (LATAM) · Asientos 20D21E\n02:00 (+1) - Vuelo LIM → AEP (American Airlines) · Asientos 18DEF", notes: "Llegada a Buenos Aires 08:30 del 29/6. ¡Fin del viaje!" },
   ],
   budget: { total: 0, currency: "USD" },
@@ -431,10 +431,10 @@ function WeatherWidget({ itinerary }) {
       if (day.date <= today) city = day.city;
       else break;
     }
-    // If trip hasn't started yet, show Buenos Aires; if it's over, show Siesta Key
+    // If trip hasn't started yet, show Buenos Aires; if it's over, show Miami
     if (!city) {
       const firstDay = days[0]?.date;
-      city = firstDay && today < firstDay ? "bsas" : "siesta";
+      city = firstDay && today < firstDay ? "bsas" : "miami";
     }
     setCurrentCity(city);
   }, [itinerary]);
@@ -537,21 +537,103 @@ function WeatherWidget({ itinerary }) {
 
 // ========== SECTIONS ==========
 
+// ── NEXT UP: find the next concrete event from the itinerary ──
+const getNextEvent = (itinerary) => {
+  const now = getUSNow();
+  const events = [];
+  (itinerary || []).forEach(day => {
+    (day.activities || "").split("\n").forEach(line => {
+      const m = line.match(/^(\d{1,2}):(\d{2})\s*[-·]\s*(.+)$/);
+      if (m) {
+        const dt = new Date(`${day.date}T${m[1].padStart(2,"0")}:${m[2]}:00`);
+        events.push({ dt, text: m[3].trim(), city: day.city, date: day.date });
+      }
+    });
+  });
+  events.sort((a, b) => a.dt - b.dt);
+  return events.find(e => e.dt > now) || null;
+};
+
 function DashboardSection({ data, updateData }) {
   const totalExpenses = (data.expenses || []).reduce((s, e) => s + (e.amount || 0), 0);
   const byCategory = {};
   (data.expenses || []).forEach((e) => { byCategory[e.category] = (byCategory[e.category] || 0) + (e.amount || 0); });
   const topCategory = Object.entries(byCategory).sort((a, b) => b[1] - a[1])[0];
-  const daysUntil = Math.max(0, Math.ceil((new Date("2026-06-11") - getUSNow()) / (1000 * 60 * 60 * 24)));
   const confirmedFlights = (data.flights || []).filter((f) => f.status === "confirmado").length;
+
+  // Trip state
+  const TRIP_START = "2026-06-11";
+  const TRIP_END   = "2026-06-28";
+  const TOTAL_DAYS = 18;
+  const today = getUSToday();
+  const onTrip = today >= TRIP_START && today <= TRIP_END;
+  const tripOver = today > TRIP_END;
+  const daysUntil = Math.max(0, Math.ceil((new Date(TRIP_START + "T00:00:00") - getUSNow()) / 86400000));
+  const tripDay = onTrip ? Math.floor((new Date(today + "T12:00:00") - new Date(TRIP_START + "T12:00:00")) / 86400000) + 1 : 0;
+
+  // Current city today
+  const sortedDays = (data.itinerary || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+  let todayCity = null, todayTitle = "";
+  for (const d of sortedDays) {
+    if (d.date <= today) { todayCity = d.city; todayTitle = d.title; }
+    else break;
+  }
+  const cityStyle = getCityStyle(todayCity);
+
+  // Next event
+  const nextEvent = getNextEvent(data.itinerary);
+  const nextEventTime = nextEvent ? `${String(nextEvent.dt.getHours()).padStart(2,"0")}:${String(nextEvent.dt.getMinutes()).padStart(2,"0")}` : "";
+  const nextEventIsToday = nextEvent && nextEvent.date === today;
+  const nextEventLabel = nextEvent ? (nextEventIsToday ? `Hoy ${nextEventTime}` : `${nextEvent.date.slice(8)}/${nextEvent.date.slice(5,7)} · ${nextEventTime}`) : "";
 
   return (
     <div>
-      <div style={{ textAlign: "center", padding: "30px 20px 20px", background: "linear-gradient(180deg, rgba(0,212,170,0.08) 0%, transparent 100%)", borderRadius: 20, marginBottom: 20 }}>
-        <div style={{ fontSize: 13, color: "#8892A4", letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>Mundial 2026 🇦🇷</div>
-        <div style={{ fontSize: 64, fontWeight: 800, background: "linear-gradient(135deg, #75AADB, #FFFFFF, #75AADB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1, fontFamily: "'Playfair Display', serif" }}>{daysUntil}</div>
-        <div style={{ fontSize: 14, color: "#8892A4", marginTop: 4 }}>días para el viaje</div>
-      </div>
+      {/* HERO dinámico */}
+      {onTrip ? (
+        <div style={{ padding: "24px 20px", background: `linear-gradient(135deg, ${cityStyle.bg}CC 0%, rgba(10,14,26,0.4) 100%)`, borderRadius: 20, marginBottom: 16, border: `1px solid ${cityStyle.accent}30` }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div>
+              <div style={{ fontSize: 11, color: cityStyle.accent, letterSpacing: 2, textTransform: "uppercase", marginBottom: 6, fontWeight: 700 }}>Mundial 2026 🇦🇷 · Día {tripDay} de {TOTAL_DAYS}</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: "#FFFFFF", fontFamily: "'Playfair Display', serif", lineHeight: 1.15 }}>{cityStyle.label || "En viaje"}</div>
+              {todayTitle && <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", marginTop: 4 }}>{todayTitle}</div>}
+            </div>
+          </div>
+          {/* Barra de progreso del viaje */}
+          <div style={{ marginTop: 16 }}>
+            <div style={{ height: 5, background: "rgba(255,255,255,0.1)", borderRadius: 3, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${Math.round(tripDay / TOTAL_DAYS * 100)}%`, background: cityStyle.accent, borderRadius: 3, transition: "width .5s" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 5 }}>
+              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.4)" }}>11 jun</span>
+              <span style={{ fontSize: 10, color: cityStyle.accent, fontWeight: 700 }}>{Math.round(tripDay / TOTAL_DAYS * 100)}%</span>
+              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.4)" }}>28 jun</span>
+            </div>
+          </div>
+        </div>
+      ) : tripOver ? (
+        <div style={{ textAlign: "center", padding: "30px 20px 20px", background: "linear-gradient(180deg, rgba(0,212,170,0.08) 0%, transparent 100%)", borderRadius: 20, marginBottom: 16 }}>
+          <div style={{ fontSize: 40 }}>🇦🇷</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: "#E8ECF4", fontFamily: "'Playfair Display', serif", marginTop: 8 }}>¡Qué viaje!</div>
+          <div style={{ fontSize: 13, color: "#8892A4", marginTop: 4 }}>Mundial 2026 · 18 días · 9 ciudades</div>
+        </div>
+      ) : (
+        <div style={{ textAlign: "center", padding: "30px 20px 20px", background: "linear-gradient(180deg, rgba(0,212,170,0.08) 0%, transparent 100%)", borderRadius: 20, marginBottom: 16 }}>
+          <div style={{ fontSize: 13, color: "#8892A4", letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>Mundial 2026 🇦🇷</div>
+          <div style={{ fontSize: 64, fontWeight: 800, background: "linear-gradient(135deg, #75AADB, #FFFFFF, #75AADB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1, fontFamily: "'Playfair Display', serif" }}>{daysUntil}</div>
+          <div style={{ fontSize: 14, color: "#8892A4", marginTop: 4 }}>{daysUntil === 1 ? "día para el viaje" : "días para el viaje"}</div>
+        </div>
+      )}
+
+      {/* NEXT UP */}
+      {nextEvent && (onTrip || daysUntil <= 2) && (
+        <div style={{ marginBottom: 16, borderRadius: 16, background: "linear-gradient(135deg, rgba(0,212,170,0.12) 0%, rgba(0,180,216,0.06) 100%)", border: "1px solid rgba(0,212,170,0.25)", padding: "14px 16px", display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(0,212,170,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>⏭️</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 10, color: "#00D4AA", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.2, marginBottom: 2 }}>Próximo · {nextEventLabel}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4", lineHeight: 1.3 }}>{nextEvent.text}</div>
+          </div>
+        </div>
+      )}
 
       <WeatherWidget itinerary={data.itinerary} />
 
@@ -674,6 +756,8 @@ function DashboardSection({ data, updateData }) {
 }
 
 function FlightsSection({ data, updateData }) {
+  const [editingId, setEditingId] = useState(null);
+
   const update = (id, field, val) => {
     const flights = (data.flights || []).map((f) => (f.id === id ? { ...f, [field]: val } : f));
     updateData({ ...data, flights });
@@ -696,45 +780,119 @@ function FlightsSection({ data, updateData }) {
     const num = (flight.flightNumber || '').replace(/\s/g, '');
     const airlineKey = (flight.airline || '').toLowerCase().trim();
     const iata = AIRLINE_IATA[airlineKey] || flight.airline?.replace(/\s/g, '') || '';
-    const code = iata + num;
-    return `https://www.google.com/search?q=${encodeURIComponent(code)}`;
+    return `https://www.google.com/search?q=${encodeURIComponent(iata + num)}`;
   };
+
+  const fmtDate = (dateStr) => {
+    if (!dateStr) return "";
+    const d = new Date(dateStr + "T12:00:00");
+    const days = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+    const months = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+    return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+  };
+
+  const today = getUSToday();
+  const flights = (data.flights || []);
+  // Next upcoming flight gets highlighted
+  const nextFlightId = flights.filter(f => f.date >= today).sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time))[0]?.id;
 
   return (
     <div>
       <div style={{ fontSize: 18, fontWeight: 800, color: "#E8ECF4", marginBottom: 16, fontFamily: "'Playfair Display', serif" }}>✈️ Vuelos</div>
-      {(data.flights || []).map((flight) => {
+      {flights.map((flight) => {
+        const isEditing = editingId === flight.id;
+        const isNext = flight.id === nextFlightId;
+        const isPast = flight.date < today;
         const flightLink = getFlightLink(flight);
+        const typeLabel = flight.type === "ida" ? "IDA" : flight.type === "vuelta" ? "VUELTA" : "INTERNO";
+
+        if (isEditing) {
+          return (
+            <Card key={flight.id} style={{ marginBottom: 14, borderColor: "rgba(0,212,170,0.3)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#00D4AA", textTransform: "uppercase" }}>✏️ Editando {flight.from} → {flight.to}</div>
+                <select value={flight.status} onChange={(e) => update(flight.id, "status", e.target.value)}
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#E8ECF4", padding: "4px 8px", fontSize: 12 }}>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="confirmado">Confirmado</option>
+                  <option value="cancelado">Cancelado</option>
+                </select>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <Input label="Aerolínea" value={flight.airline} onChange={(v) => update(flight.id, "airline", v)} />
+                <Input label="Nro Vuelo" value={flight.flightNumber} onChange={(v) => update(flight.id, "flightNumber", v)} placeholder="1234" />
+                <Input label="Fecha" value={flight.date} onChange={(v) => update(flight.id, "date", v)} type="date" />
+                <Input label="Hora" value={flight.time} onChange={(v) => update(flight.id, "time", v)} type="time" />
+              </div>
+              <Input label="Asientos" value={flight.seats || ""} onChange={(v) => update(flight.id, "seats", v)} placeholder="12 A·B·C·D" />
+              <Input label="Código Confirmación" value={flight.confirmation} onChange={(v) => update(flight.id, "confirmation", v)} placeholder="ABC123" />
+              <Input label="Notas" value={flight.notes} onChange={(v) => update(flight.id, "notes", v)} placeholder="Terminal, gate, etc." />
+              <Btn onClick={() => setEditingId(null)} small style={{ width: "100%", marginTop: 8 }}>✓ Listo</Btn>
+            </Card>
+          );
+        }
+
+        // ── BOARDING PASS compact view ──
         return (
-        <Card key={flight.id} style={{ marginBottom: 14 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#E8ECF4", textTransform: "uppercase" }}>
-              {flight.type === "ida" ? "🛫 Ida" : flight.type === "vuelta" ? "🛬 Vuelta" : "✈️ Interno"} — {flight.from} → {flight.to}
+          <div key={flight.id} onClick={() => setEditingId(flight.id)}
+            style={{ marginBottom: 12, borderRadius: 16, overflow: "hidden", cursor: "pointer", opacity: isPast ? 0.45 : 1,
+                     border: `1px solid ${isNext ? "rgba(0,212,170,0.45)" : "rgba(255,255,255,0.08)"}`,
+                     background: isNext ? "linear-gradient(135deg, rgba(0,212,170,0.1) 0%, rgba(10,14,26,0.4) 100%)" : "rgba(255,255,255,0.03)",
+                     boxShadow: isNext ? "0 4px 24px rgba(0,212,170,0.12)" : "none" }}>
+            {/* Top strip */}
+            <div style={{ padding: "8px 14px", borderBottom: "1px dashed rgba(255,255,255,0.1)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 10, fontWeight: 800, color: isNext ? "#00D4AA" : "#8892A4", letterSpacing: 1.5 }}>{typeLabel}</span>
+                {isNext && <span style={{ fontSize: 9, fontWeight: 800, color: "#0A0E1A", background: "#00D4AA", borderRadius: 4, padding: "2px 6px", letterSpacing: 0.5 }}>PRÓXIMO</span>}
+              </div>
+              <span style={{ fontSize: 11, color: "#8892A4", fontWeight: 600 }}>{flight.airline}{flight.flightNumber ? ` · ${flight.flightNumber}` : ""}</span>
             </div>
-            <select value={flight.status} onChange={(e) => update(flight.id, "status", e.target.value)}
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#E8ECF4", padding: "4px 8px", fontSize: 12 }}>
-              <option value="pendiente">Pendiente</option>
-              <option value="confirmado">Confirmado</option>
-              <option value="cancelado">Cancelado</option>
-            </select>
+            {/* Main row */}
+            <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: "#E8ECF4", fontVariantNumeric: "tabular-nums", letterSpacing: 0.5 }}>{flight.from}</div>
+                <div style={{ fontSize: 12, color: isNext ? "#00D4AA" : "#8892A4", fontWeight: 700, marginTop: 2 }}>{flight.time}</div>
+              </div>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ width: "100%", display: "flex", alignItems: "center", gap: 6 }}>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.15)" }} />
+                  <span style={{ fontSize: 13 }}>✈️</span>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.15)" }} />
+                </div>
+                <div style={{ fontSize: 10, color: "#8892A4", marginTop: 4 }}>{fmtDate(flight.date)}</div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 24, fontWeight: 800, color: "#E8ECF4", fontVariantNumeric: "tabular-nums", letterSpacing: 0.5 }}>{flight.to}</div>
+              </div>
+            </div>
+            {/* Seats bar — prominent */}
+            {flight.seats && (
+              <div style={{ margin: "0 14px 12px", padding: "9px 12px", background: "rgba(0,180,216,0.08)", border: "1px solid rgba(0,180,216,0.15)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                <span style={{ fontSize: 10, color: "#00B4D8", fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, flexShrink: 0 }}>💺 Asientos</span>
+                <span style={{ fontSize: 15, color: "#E8ECF4", fontWeight: 800, fontVariantNumeric: "tabular-nums", textAlign: "right" }}>{flight.seats}</span>
+              </div>
+            )}
+            {/* Bottom: confirmation + status link */}
+            {(flight.confirmation || flightLink) && (
+              <div style={{ padding: "0 14px 12px", display: "flex", gap: 8 }}>
+                {flight.confirmation && (
+                  <button onClick={(e) => { e.stopPropagation(); navigator.clipboard?.writeText(flight.confirmation); }}
+                    style={{ flex: 1, padding: "7px 10px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, fontSize: 12, color: "#E8ECF4", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                    🔑 {flight.confirmation} <span style={{ fontSize: 10, color: "#8892A4" }}>copiar</span>
+                  </button>
+                )}
+                {flightLink && (
+                  <a href={flightLink} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}
+                    style={{ flex: 1, padding: "7px 10px", background: "rgba(0,180,216,0.08)", border: "1px solid rgba(0,180,216,0.15)", borderRadius: 8, fontSize: 12, color: "#00B4D8", fontWeight: 700, textDecoration: "none", textAlign: "center" }}>
+                    Estado del vuelo →
+                  </a>
+                )}
+              </div>
+            )}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-            <Input label="Aerolínea" value={flight.airline} onChange={(v) => update(flight.id, "airline", v)} />
-            <Input label="Nro Vuelo" value={flight.flightNumber} onChange={(v) => update(flight.id, "flightNumber", v)} placeholder="1234" />
-            <Input label="Fecha" value={flight.date} onChange={(v) => update(flight.id, "date", v)} type="date" />
-            <Input label="Hora" value={flight.time} onChange={(v) => update(flight.id, "time", v)} type="time" />
-          </div>
-          <Input label="Código Confirmación" value={flight.confirmation} onChange={(v) => update(flight.id, "confirmation", v)} placeholder="ABC123" />
-          <Input label="Notas" value={flight.notes} onChange={(v) => update(flight.id, "notes", v)} placeholder="Terminal, gate, etc." />
-          {flightLink && (
-            <a href={flightLink} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px", background: "rgba(0,180,216,0.08)", borderRadius: 10, textDecoration: "none", border: "1px solid rgba(0,180,216,0.15)", marginTop: 4 }}>
-              <span style={{ fontSize: 14 }}>✈️</span>
-              <span style={{ fontSize: 13, color: "#00B4D8", fontWeight: 600 }}>Ver estado del vuelo</span>
-            </a>
-          )}
-        </Card>
         );
       })}
+      <div style={{ fontSize: 11, color: "#6B7280", textAlign: "center", marginTop: 4 }}>Tocá cualquier vuelo para editarlo</div>
     </div>
   );
 }
@@ -1160,8 +1318,8 @@ function ExpensesSection({ data, updateData }) {
           const dayTotal = dayExpenses.reduce((s, e) => s + e.amount, 0);
           const d = new Date(date + "T12:00:00");
           const label = dayNames[d.getDay()] + " " + d.getDate() + "/" + (d.getMonth() + 1);
-          const siestaToday = getUSToday();
-          const isToday = date === siestaToday;
+          const miamiToday = getUSToday();
+          const isToday = date === miamiToday;
 
           return (
             <div key={date} style={{ marginBottom: 16 }}>
@@ -1424,6 +1582,57 @@ function DocumentsSection({ data, updateData }) {
   );
 }
 
+// ── Weather forecast for a specific day + city (used in itinerary detail) ──
+function DayWeather({ date, city }) {
+  const [forecast, setForecast] = useState(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!date || !city || !CITY_COORDS[city]) return;
+    setForecast(null);
+    setError(false);
+    const c = CITY_COORDS[city];
+    // Open-Meteo forecast for specific date (up to 16 days ahead)
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode,uv_index_max&timezone=${encodeURIComponent(c.tz)}&start_date=${date}&end_date=${date}`;
+    fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        if (d?.daily?.time?.length > 0) setForecast(d.daily);
+        else setError(true);
+      })
+      .catch(() => setError(true));
+  }, [date, city]);
+
+  if (!date || !city || !CITY_COORDS[city] || error) return null;
+  if (!forecast) return (
+    <div style={{ marginBottom: 12, padding: "10px 14px", background: "rgba(0,180,216,0.04)", borderRadius: 12, fontSize: 12, color: "#8892A4" }}>
+      🌡️ Cargando pronóstico...
+    </div>
+  );
+
+  const info = getWeatherInfo(forecast.weathercode[0]);
+  const max = Math.round(forecast.temperature_2m_max[0]);
+  const min = Math.round(forecast.temperature_2m_min[0]);
+  const rain = forecast.precipitation_probability_max[0];
+  const uv = Math.round(forecast.uv_index_max?.[0] || 0);
+
+  return (
+    <div style={{ marginBottom: 12, padding: "12px 14px", background: "linear-gradient(135deg, rgba(0,180,216,0.1) 0%, rgba(0,212,170,0.04) 100%)", border: "1px solid rgba(0,180,216,0.15)", borderRadius: 12, display: "flex", alignItems: "center", gap: 14 }}>
+      <div style={{ fontSize: 32, lineHeight: 1 }}>{info.icon}</div>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: "#E8ECF4" }}>{info.label}</div>
+        <div style={{ fontSize: 11, color: "#8892A4", marginTop: 2 }}>
+          {CITY_COORDS[city].name} · pronóstico del día
+        </div>
+      </div>
+      <div style={{ textAlign: "right" }}>
+        <div style={{ fontSize: 16, fontWeight: 800, color: "#E8ECF4" }}>{max}° <span style={{ fontSize: 12, color: "#8892A4", fontWeight: 400 }}>/ {min}°</span></div>
+        <div style={{ fontSize: 10, color: "#8892A4", marginTop: 2 }}>🌧 {rain}%{uv >= 8 ? ` · ☀️ UV ${uv}` : ""}</div>
+      </div>
+    </div>
+  );
+}
+
 function ItinerarySection({ data, updateData }) {
   const [adding, setAdding] = useState(false);
   const [viewing, setViewing] = useState(null);
@@ -1528,7 +1737,10 @@ function ItinerarySection({ data, updateData }) {
               <div style={{ fontSize: 11, color: viewDay.city ? getCityStyle(viewDay.city).accent : "#00D4AA", fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
                 {viewDay.city ? getCityStyle(viewDay.city).label : ""} — {dayLabel} {viewDay.date?.slice(5)} · Día {dayIdx + 1}
               </div>
-              <div style={{ fontSize: 22, fontWeight: 800, color: "#E8ECF4", marginBottom: 18, fontFamily: "'Playfair Display', serif" }}>{viewDay.title}</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: "#E8ECF4", marginBottom: 14, fontFamily: "'Playfair Display', serif" }}>{viewDay.title}</div>
+
+              {/* Weather forecast for this day+city */}
+              <DayWeather date={viewDay.date} city={viewDay.city} />
 
               {/* Activities */}
               {viewDay.activities && (
@@ -1639,8 +1851,25 @@ function ItinerarySection({ data, updateData }) {
         const dayLabel = d ? dayNames[d.getDay()] : "";
         const isToday = day.date === today;
 
+        // City group separator — show when city changes from previous day
+        const prevCity = idx > 0 ? itinerary[idx - 1].city : null;
+        const showCityHeader = day.city && day.city !== prevCity;
+        const cs = getCityStyle(day.city);
+        const cityDayCount = day.city ? itinerary.filter(x => x.city === day.city).length : 0;
+
         return (
-          <Card key={day.id} onClick={() => openDetail(day)} style={{ marginBottom: 10, padding: 14, cursor: "pointer", borderColor: isToday ? "rgba(0,212,170,0.4)" : day.city ? `${getCityStyle(day.city).accent}30` : undefined, background: isToday ? "rgba(0,212,170,0.06)" : day.city ? `${getCityStyle(day.city).bg}40` : undefined }}>
+          <div key={day.id}>
+            {showCityHeader && (
+              <div style={{ display: "flex", alignItems: "center", gap: 10, margin: idx === 0 ? "4px 0 12px" : "20px 0 12px" }}>
+                <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, transparent, ${cs.accent}50)` }} />
+                <div style={{ fontSize: 12, fontWeight: 800, color: cs.accent, textTransform: "uppercase", letterSpacing: 2, whiteSpace: "nowrap" }}>
+                  {cs.label}
+                </div>
+                <span style={{ fontSize: 10, color: "#6B7280", fontWeight: 600, whiteSpace: "nowrap" }}>{cityDayCount} {cityDayCount === 1 ? "día" : "días"}</span>
+                <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, ${cs.accent}50, transparent)` }} />
+              </div>
+            )}
+          <Card onClick={() => openDetail(day)} style={{ marginBottom: 10, padding: 14, cursor: "pointer", borderColor: isToday ? "rgba(0,212,170,0.4)" : day.city ? `${getCityStyle(day.city).accent}30` : undefined, background: isToday ? "rgba(0,212,170,0.06)" : day.city ? `${getCityStyle(day.city).bg}40` : undefined }}>
             {isToday && <div style={{ fontSize: 10, color: "#00D4AA", fontWeight: 800, textTransform: "uppercase", letterSpacing: 2, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}><span style={{ width: 6, height: 6, borderRadius: 3, background: "#00D4AA", animation: "pulse 1.5s infinite" }} /> Hoy</div>}
             {/* Header with date box */}
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: day.activities ? 10 : 0 }}>
@@ -1678,6 +1907,7 @@ function ItinerarySection({ data, updateData }) {
             )}
             {day.notes && <div style={{ fontSize: 12, color: "#8892A4", marginTop: 6, fontStyle: "italic" }}>{day.notes}</div>}
           </Card>
+          </div>
         );
       })}
     </div>
