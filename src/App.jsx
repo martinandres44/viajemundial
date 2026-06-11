@@ -17,7 +17,7 @@ const CITY_COORDS = {
   sedona:  { lat:  34.8697, lon: -111.7609,tz: "America/Phoenix",                name: "Sedona",       emoji: "🔴" },
   dallas:  { lat:  32.7767, lon: -96.7970, tz: "America/Chicago",                name: "Dallas",       emoji: "⭐" },
   orlando: { lat:  28.5383, lon: -81.3792, tz: "America/New_York",               name: "Orlando",      emoji: "🏰" },
-  miami:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Miami",        emoji: "🏖️" },
+  siesta:   { lat:  25.7617, lon: -80.1918, tz: "America/New_York",               name: "Siesta Key",        emoji: "🏖️" },
 };
 
 const buildWeatherUrl = (cityId) => {
@@ -89,7 +89,7 @@ const CITY_COLORS = {
   sedona: { bg: "#4A1A0A", accent: "#EF4444", label: "Sedona 🔴" },
   dallas: { bg: "#0D2D1A", accent: "#34D399", label: "Dallas ⭐" },
   orlando:{ bg: "#1A2D3D", accent: "#38BDF8", label: "Orlando 🏰" },
-  miami:  { bg: "#0D2D2D", accent: "#2DD4BF", label: "Miami 🏖️" },
+  siesta:  { bg: "#0D2D2D", accent: "#2DD4BF", label: "Siesta Key 🏖️" },
 };
 const getCityStyle = (city) => CITY_COLORS[city] || { bg: "rgba(255,255,255,0.04)", accent: "#00D4AA", label: "" };
 
@@ -125,14 +125,14 @@ const DEFAULT_DATA = {
   ],
   cars: [
     { id:"car1", company:"Alamo", city:"Las Vegas → Phoenix", pickUp:"2026-06-17", dropOff:"2026-06-21", confirmation:"#898251065COUNT", cost:0, notes:"Nissan Rogue · LAS McCarran → PHX Sky Harbor · Grand Canyon y Sedona · CONFIRMADA", paid:false, status:"confirmado" },
-    { id:"car2", company:"Alamo", city:"Orlando → Miami",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Miami · CONFIRMADA", paid:false, status:"confirmado" },
+    { id:"car2", company:"Alamo", city:"Orlando → Siesta Key",     pickUp:"2026-06-22", dropOff:"2026-06-28", confirmation:"#L55243024B3",    cost:0, notes:"Nissan Rogue · MCO Orlando → MIA Siesta Key · CONFIRMADA", paid:false, status:"confirmado" },
   ],
   tickets: [],
   expenses: [],
   itinerary: [
-    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Miami ✈️", city: "bsas", activities: "17:35 - Vuelo AEP → LIM (LATAM)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Miami 06:54 del 12/6" },
-    { id: "d2", date: "2026-06-12", title: "Miami → Nueva York — Llegada 🗽", city: "nyc",
-  activities: "06:54 - Llegada a Miami MIA · estirar piernas, café\n09:59 - Vuelo MIA→NYC American Airlines · $204/pax\n13:01 - Llegada a LGA/JFK · AirTrain + subway E al hotel (~$8.50) o taxi (~$55-70)\n14:00 - Check-in DoubleTree Hilton · dejar equipaje aunque no haya cuarto\n14:30 - Almuerzo en Hells Kitchen · 9th Ave entre 45th-55th · Sate Kampar o Danji (cocina coreana)\n15:30 - Times Square · primera impresión · toméense la foto clásica en el centro · entrar al M&Ms World o TKTS para ver precios Broadway\n16:30 - 5th Avenue · caminata desde 42nd hacia el norte · frente al Rockefeller Center · St. Patrick Cathedral · entrada libre\n17:00 - Grand Central Terminal · Main Concourse · techo con constelaciones · Whispering Gallery en la esquina noreste del nivel inferior · acústica increíble · gratis\n18:30 - One World Observatory · reservar ANTES del viaje · ~$45/pax · mejor al atardecer · piso 100 · vistas 360° de Manhattan\n20:30 - Cena en Lower Manhattan · Stone Street (la calle de adoquines más antigua de NYC) · ambiente de pub · buena cerveza\n22:00 - Paseo nocturno por el puente de Brooklyn desde Manhattan si tienen energía",
+    { id: "d1", date: "2026-06-11", title: "Vuelo Buenos Aires → Siesta Key ✈️", city: "bsas", activities: "17:35 - Vuelo AEP → LIM (LATAM)\n23:59 - Vuelo LIM → MIA (American Airlines)", notes: "Llegada a Siesta Key 06:54 del 12/6" },
+    { id: "d2", date: "2026-06-12", title: "Siesta Key → Nueva York — Llegada 🗽", city: "nyc",
+  activities: "06:54 - Llegada a Siesta Key MIA · estirar piernas, café\n09:59 - Vuelo MIA→NYC American Airlines · $204/pax\n13:01 - Llegada a LGA/JFK · AirTrain + subway E al hotel (~$8.50) o taxi (~$55-70)\n14:00 - Check-in DoubleTree Hilton · dejar equipaje aunque no haya cuarto\n14:30 - Almuerzo en Hells Kitchen · 9th Ave entre 45th-55th · Sate Kampar o Danji (cocina coreana)\n15:30 - Times Square · primera impresión · toméense la foto clásica en el centro · entrar al M&Ms World o TKTS para ver precios Broadway\n16:30 - 5th Avenue · caminata desde 42nd hacia el norte · frente al Rockefeller Center · St. Patrick Cathedral · entrada libre\n17:00 - Grand Central Terminal · Main Concourse · techo con constelaciones · Whispering Gallery en la esquina noreste del nivel inferior · acústica increíble · gratis\n18:30 - One World Observatory · reservar ANTES del viaje · ~$45/pax · mejor al atardecer · piso 100 · vistas 360° de Manhattan\n20:30 - Cena en Lower Manhattan · Stone Street (la calle de adoquines más antigua de NYC) · ambiente de pub · buena cerveza\n22:00 - Paseo nocturno por el puente de Brooklyn desde Manhattan si tienen energía",
   notes: "💡 AirTrain desde JFK + subway E/A al centro cuesta $8.50 vs taxi $60+. Reservar One World Observatory ANTES del viaje en oneworldobservatory.com." },
     { id: "d3", date: "2026-06-13", title: "NYC — The Met + Central Park + Brooklyn 🗽", city: "nyc",
   activities: "08:00 - Desayuno americano en diner local · Lexington Candy Shop (Upper East Side) o E.A.T. · huevos, bagel, jugo\n09:30 - The Metropolitan Museum of Art · llegar antes de las 10am · entrada ~$30/pax · impresionismo europeo (sala 800-830) · sala egipcia con el Templo de Dendur · arte medieval · armaduras del siglo XVI · mínimo 2.5hs · azotea abierta en verano con vistas al parque\n12:00 - Almuerzo en el Café del Met o en el parque con algo de la entrada\n13:00 - Central Park desde la 5th Ave ·  Conservatory Garden → Jackie Kennedy Onassis Reservoir (4km de lago) → Bow Bridge (foto icónica · la más fotografiada del parque) → Bethesda Fountain y Terrace → Strawberry Fields (tributo a John Lennon · mosaico Imagine) → Tavern on the Green exterior\n15:30 - Salida del parque hacia el sur · Madison Avenue o Lexington · vidriera de tiendas\n16:30 - Subway a Brooklyn · línea 2/3 a Clark St o A/C a High St\n17:00 - DUMBO (Down Under the Manhattan Bridge Overpass) · foto obligatoria desde Washington St con el puente de Brooklyn y el skyline · Jane's Carousel (carrusel histórico frente al East River · $2)\n17:45 - Brooklyn Bridge caminando · desde el lado de Brooklyn hacia Manhattan · 30-40 min cruzando · mejor con luz del atardecer\n19:30 - Cena en DUMBO o Brooklyn Heights · Juliana's Pizza (rival histórica de Grimaldi's · debajo del puente) o Time Out Market Brooklyn\n21:00 - Westlight Rooftop Bar · William Vale Hotel piso 22 en Williamsburg · vistas increíbles de Manhattan · reservar mesa con anticipación",
@@ -152,9 +152,9 @@ const DEFAULT_DATA = {
     { id: "d12", date: "2026-06-22", title: "Dallas ⚽ PARTIDO 2 🇦🇷", city: "dallas", activities: "09:30 - Salir del Holiday Inn DFW en Uber/Lyft\n⚠️ Ruta: Holiday Inn DFW → I-30 W → TX-360 S → AT&T Way · ~30km · 40-60min\n12:00 - ⚽ ARGENTINA 🇦🇷 vs AUSTRIA 🇦🇹 · AT&T Stadium Arlington\n17:30 - Uber al aeropuerto DFW\n18:50 - Vuelo DFW → Orlando (Southwest)", notes: "⚠️ Vuelo 18:50 — tiempo justo post partido. Tener Uber pedido ANTES de salir del estadio." },
     { id: "d13", date: "2026-06-23", title: "Orlando 🏰", city: "orlando", activities: "Descanso post partido y viaje\nDisney Springs · International Drive · Universal CityWalk", notes: "Día de recuperación. Definir parques." },
     { id: "d14", date: "2026-06-24", title: "Orlando — Parques 🏰", city: "orlando", activities: "Parques temáticos · Universal / Disney / SeaWorld\nReservar tickets online con anticipación", notes: "El parque que elijan el día anterior." },
-    { id: "d15", date: "2026-06-25", title: "Miami o Siesta Key 🏖️", city: "miami", activities: "Devolver auto Orlando\nViaje a Miami Beach o Siesta Key\nCheck-in · playa y relax", notes: "⏳ Destino final aún por definir." },
-    { id: "d16", date: "2026-06-26", title: "Playa — Relax total 🏖️", city: "miami", activities: "Playa y relax\nRestaurantes · atardecer", notes: "Días de descanso merecidos." },
-    { id: "d17", date: "2026-06-27", title: "Último día de playa 🏖️", city: "miami", activities: "Último día de relax\nCena de despedida del viaje", notes: "Penúltimo día." },
+    { id: "d15", date: "2026-06-25", title: "Siesta Key o Siesta Key 🏖️", city: "siesta", activities: "Devolver auto Orlando\nViaje a Siesta Key Beach o Siesta Key\nCheck-in · playa y relax", notes: "⏳ Destino final aún por definir." },
+    { id: "d16", date: "2026-06-26", title: "Playa — Relax total 🏖️", city: "siesta", activities: "Playa y relax\nRestaurantes · atardecer", notes: "Días de descanso merecidos." },
+    { id: "d17", date: "2026-06-27", title: "Último día de playa 🏖️", city: "siesta", activities: "Último día de relax\nCena de despedida del viaje", notes: "Penúltimo día." },
     { id: "d18", date: "2026-06-28", title: "Vuelta a Buenos Aires ✈️🇦🇷", city: "bsas", activities: "15:35 - Vuelo MIA → LIM (LATAM) · Asientos 20D21E\n02:00 (+1) - Vuelo LIM → AEP (American Airlines) · Asientos 18DEF", notes: "Llegada a Buenos Aires 08:30 del 29/6. ¡Fin del viaje!" },
   ],
   budget: { total: 0, currency: "USD" },
@@ -431,10 +431,10 @@ function WeatherWidget({ itinerary }) {
       if (day.date <= today) city = day.city;
       else break;
     }
-    // If trip hasn't started yet, show Buenos Aires; if it's over, show Miami
+    // If trip hasn't started yet, show Buenos Aires; if it's over, show Siesta Key
     if (!city) {
       const firstDay = days[0]?.date;
-      city = firstDay && today < firstDay ? "bsas" : "miami";
+      city = firstDay && today < firstDay ? "bsas" : "siesta";
     }
     setCurrentCity(city);
   }, [itinerary]);
@@ -1160,8 +1160,8 @@ function ExpensesSection({ data, updateData }) {
           const dayTotal = dayExpenses.reduce((s, e) => s + e.amount, 0);
           const d = new Date(date + "T12:00:00");
           const label = dayNames[d.getDay()] + " " + d.getDate() + "/" + (d.getMonth() + 1);
-          const miamiToday = getUSToday();
-          const isToday = date === miamiToday;
+          const siestaToday = getUSToday();
+          const isToday = date === siestaToday;
 
           return (
             <div key={date} style={{ marginBottom: 16 }}>
